@@ -68,4 +68,24 @@ function addServices(data){
         row.appendChild(PlatformElement)
         row.appendChild(DepartureElement)
         row.appendChild(ServiceElement)
-        row.appen
+        row.appendChild(OperatorElement)
+        
+        row.className = "row"
+        stops.appendChild(row)
+    }
+}
+async function getServiceInfo(Start,End,date,time) {
+    try {
+        const response = await fetch('https://api-proxy.thomas-abadines.workers.dev/api/search/' + Start + "/to/" + End + "/" + date + "/" + time);
+        console.log('https://api-proxy.thomas-abadines.workers.dev/api/search/' + Start + "/to/" + End + "/" + date + "/" + time)
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        stnprint.innerHTML = "Error fetching Data"
+        return null;
+    }
+}
