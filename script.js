@@ -591,4 +591,32 @@ async function goNew(name) {
         const firstWord = s.stationName.toLowerCase().split(" ")[0]
         return firstWord.startsWith(input)
       })
-      if (firstWordM
+      if (firstWordMatches.length === 1) {
+        match = firstWordMatches[0]
+      } else if (firstWordMatches.length > 1) {
+        match = firstWordMatches.sort((a, b) => a.stationName.length - b.stationName.length)[0]
+      }
+    }
+
+    // 4. Contains match as last resort
+    if (!match) {
+      const containsMatches = data.filter(
+        s => s.stationName.toLowerCase().includes(input)
+      )
+      if (containsMatches.length === 1) {
+        match = containsMatches[0]
+      } else if (containsMatches.length > 1) {
+        match = containsMatches.sort((a, b) => a.stationName.length - b.stationName.length)[0]
+      }
+    }
+
+    if (match) {
+      station.value = match.crsCode
+      run()
+    }
+
+  } catch (err) {
+    stnprint.innerHTML = `Error loading station data`
+    console.error(err)
+  }
+}
