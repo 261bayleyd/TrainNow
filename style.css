@@ -1,0 +1,49 @@
+html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Noto Sans';
+  }
+.noto-sans-font {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+  }
+#title{
+  font-family: 'Noto Sans';
+}
+#table{
+  font-family: 'Noto Sans';
+}
+#titlerow{
+  font-style: 'bold';
+  font-weight: 700;
+  /* display: flex;
+  justify-content: space-between;
+  */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.row{
+  font-weight: 500;
+  /* display: flex;
+  justify-content: space-between; */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+#stnprint{
+  font-family: 'Noto Sans';
+}
+#station-lookup{
+  font-family: 'Noto Sans';
+}
+#popularstations{
+  display: flex;
+  flex-direction: row;
+}
+.popbut{
+  margin-top: auto;
+  margin-bottom: auto;
+}

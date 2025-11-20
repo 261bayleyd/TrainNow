@@ -1,0 +1,33 @@
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Journey Planner - TrainNow</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Journey Planner</h2>
+    <input type = "text" placeholder="Start Station" id = "Start">
+    <input type = "text" placeholder="End Station" id = "End">
+    <input type = "text" placeholder="YYYY/MM/DD" id = "date">
+    <input type = "text" placeholder="Time" id = "time">
+    <!-- <input type="checkbox" id="myCheckbox"> -->
+    <button onclick = "Submit()">Submit</button>
+    <h2 id = "infotitle"></h2>
+    <div id = "stops" style = "display: none">
+        <div id = "titlerow">
+            <span>Start</span>
+            <span>Platform</span>
+            <span>Departure</span>
+            <span>Service</span>
+            <span>Operator</span>
+        </div>
+    </div>
+    <script src="script.js" crossorigin="anonymous"></script>
+</body>
+</html>
