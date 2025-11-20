@@ -266,27 +266,3 @@ async function getServiceInfo(serviceUid,date) {
 
   function applyAndSubmit(found) {
     if (!found) return;
-    const serviceInput = document.getElementById("ServiceUid");
-    const dateInput = document.getElementById("date");
-    if (!serviceInput || !dateInput) return;
-
-    const mm = found.m.toString().padStart(2, "0");
-    const dd = found.d.toString().padStart(2, "0");
-    serviceInput.value = found.service;
-    dateInput.value = `${found.y}/${mm}/${dd}`;
-
-    if (typeof Submit === "function") Submit();
-  }
-
-  function initAutofill() {
-    try {
-      const found = tryFromHash() || tryFromQuery() || tryFromPath();
-      applyAndSubmit(found);
-    } catch (e) {
-      console.error("Autofill-from-URL failed:", e);
-    }
-  }
-
-  window.addEventListener("load", initAutofill);
-  window.addEventListener("hashchange", initAutofill);
-})();
