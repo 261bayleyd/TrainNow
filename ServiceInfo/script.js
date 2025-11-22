@@ -66,14 +66,15 @@ function addStations(data){
 
         let AssociationsElement = document.createElement("span")
         if (data.locations[i].associations != null){
+
             for (let j=0;j<data.locations[i].associations.length; j++){
-            if (data.locations[i].associations[j].type == "divide"){
-              AssociationsElement.innerHTML = AssociationsElement.innerHTML + "This train divides here"
-              AssociationsElement.onclick = () => {
-                document.getElementById("ServiceUid").value = data.locations[i].associations[j].associatedUid
-                Submit()
-              }
-            }
+              let Divide = document.createElement("a")
+              Divide.innerHTML = "This Train Divides to: " + data.locations[i].associations[j].associatedUid + " "
+              Divide.onclick = () => {
+                  document.getElementById("ServiceUid").value = data.locations[i].associations[j].associatedUid
+                  Submit()
+                }
+              AssociationsElement.appendChild(Divide)
           }
         }
 
