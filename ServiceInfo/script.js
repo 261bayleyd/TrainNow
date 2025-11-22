@@ -256,4 +256,46 @@ async function getServiceInfo(serviceUid,date) {
 
     if (parts.length >= 4) {
       const [service, y, m, d] = parts.slice(-4);
-      if (/^\d{4}$/.test(y) && /^(0?[1-9]|1[0-2])$
+      if (/^\d{4}$/.test(y) && /^(0?[1-9]|1[0-2])$/.test(m) && /^(0?[1-9]|[12]\d|3[01])$/.test(d)) {
+        return { service, y, m, d };
+      }
+    }
+
+    if (parts.length >= 1) {
+      const last = parts[parts.length - 1];
+      // Avoid treating the folder/page name as the service id
+      if (last.toLowerCase() !== "serviceinfo") {
+        const service = last;
+        const { y, m, d } = todayYMD();
+        return { service, y, m, d };
+      }
+    }
+    return null;
+  }
+
+  function applyAndSubmit(found) {
+    if (!found) return;
+    const serviceInput = document.getElementById("ServiceUid");
+    const dateInput = document.getElementById("date");
+    if (!serviceInput || !dateInput) return;
+
+    const mm = found.m.toString().padStart(2, "0");
+    const dd = found.d.toString().padStart(2, "0");
+    serviceInput.value = found.service;
+    dateInput.value = `${found.y}/${mm}/${dd}`;
+
+    if (typeof Submit === "function") Submit();
+  }
+
+  function initAutofill() {
+    try {
+      const found = tryFromHash() || tryFromQuery() || tryFromPath();
+      applyAndSubmit(found);
+    } catch (e) {
+      console.error("Autofill-from-URL failed:", e);
+    }
+  }
+
+  window.addEventListener("load", initAutofill);
+  window.addEventListener("hashchange", initAutofill);
+})();
