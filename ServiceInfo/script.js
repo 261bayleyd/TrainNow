@@ -70,7 +70,12 @@ function addStations(data){
             for (let j=0;j<data.locations[i].associations.length; j++){
               let Divide = document.createElement("a")
               if (data.locations[i].associations[j].type == "next"){
+                if (data.locations[0].associations[j].type == "next"){
+                  Divide.innerHTML = "This Train was: " + data.locations[i].associations[j].associatedUid + " "
+                }
+                else{
                 Divide.innerHTML = "This Train Becomes: " + data.locations[i].associations[j].associatedUid + " "
+                }
               }
               else if (data.locations[i].associations[j].type == "divide"){
               Divide.innerHTML = "This Train Divides to: " + data.locations[i].associations[j].associatedUid + " "
