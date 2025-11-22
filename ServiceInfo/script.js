@@ -72,7 +72,7 @@ function addStations(data){
               if (data.locations[i].associations[j].type == "next"){
                 Divide.innerHTML = "This Train Becomes: " + data.locations[i].associations[j].associatedUid + " "
               }
-              if (data.locations[i].associations[j].type == "divide"){
+              else if (data.locations[i].associations[j].type == "divide"){
               Divide.innerHTML = "This Train Divides to: " + data.locations[i].associations[j].associatedUid + " "
               }
               else{
