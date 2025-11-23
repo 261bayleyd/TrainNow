@@ -81,6 +81,10 @@ function addStations(data){
                     + data.locations[i].associations[j].associatedUid + " "
                 }
               }
+              if (data.locations[i].associations[j].type == "join"){
+                  Divide.innerHTML = "This Train joins with: "
+                   + data.locations[i].associations[j].associatedUid + " "
+              }
               else if (data.locations[i].associations[j].type == "divide"){
               Divide.innerHTML = "This Train Divides to: " + data.locations[i].associations[j].associatedUid + " "
               }
