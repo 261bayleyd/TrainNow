@@ -302,4 +302,13 @@ async function getServiceInfo(serviceUid,date) {
 
   function initAutofill() {
     try {
-      const found = tryFromHash() || tryFromQuery() || tryFrom
+      const found = tryFromHash() || tryFromQuery() || tryFromPath();
+      applyAndSubmit(found);
+    } catch (e) {
+      console.error("Autofill-from-URL failed:", e);
+    }
+  }
+
+  window.addEventListener("load", initAutofill);
+  window.addEventListener("hashchange", initAutofill);
+})();
