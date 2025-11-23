@@ -81,7 +81,7 @@ function addStations(data){
                     + data.locations[i].associations[j].associatedUid + " "
                 }
               }
-              if (data.locations[i].associations[j].type == "join"){
+              else if (data.locations[i].associations[j].type == "join"){
                   Divide.innerHTML = "This Train joins with: "
                    + data.locations[i].associations[j].associatedUid + " "
               }
@@ -302,13 +302,4 @@ async function getServiceInfo(serviceUid,date) {
 
   function initAutofill() {
     try {
-      const found = tryFromHash() || tryFromQuery() || tryFromPath();
-      applyAndSubmit(found);
-    } catch (e) {
-      console.error("Autofill-from-URL failed:", e);
-    }
-  }
-
-  window.addEventListener("load", initAutofill);
-  window.addEventListener("hashchange", initAutofill);
-})();
+      const found = tryFromHash() || tryFromQuery() || tryFrom
