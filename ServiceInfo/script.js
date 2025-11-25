@@ -30,7 +30,13 @@ async function Submit(){
     else{
       powerType = data.powerType
     }
-    infotitle.innerHTML = data.origin[0].publicTime + " " + data.origin[0].description + " To " + data.destination[0].description + " - " + data.atocName + " - " + powerType
+    let passenger = ""
+    let time = data.origin[0].publicTime
+    if (data.isPassenger != true){
+      passenger = " - Empty stock Movement"
+      time = data.origin[0].workingTime
+    }
+    infotitle.innerHTML = time + " " + data.origin[0].description + " To " + data.destination[0].description + " - " + data.atocName + " - " + powerType + passenger
     addStations(data)
     stops.style.display = "block"
 }
