@@ -64,7 +64,7 @@ async function run() {
     table.style.display = "block";
       for (let i = train = 0; i < trains.length; i++ ){
         let train = trains[i]
-        newRow(train.platform, train.realtimeDeparture, train.destination, train.operator, train.status, train.statusd, train.origin, train.serviceUid)
+        newRow(train.platform, train.realtimeDeparture, train.destination, train.operator, train.status, train.statusd, train.origin, train.serviceUid, train.crs)
       }
 
       stnprint.innerHTML = "You are looking at Departures from " + stationName
@@ -88,7 +88,7 @@ async function run() {
 //     row.appendChild(operatorElement)
 //     table.appendChild(row)
 // }
-function newRow(platform, departure, destination, operator, status, statusd, origin, ServiceUid) {
+function newRow(platform, departure, destination, operator, status, statusd, origin, ServiceUid, crs) {
   let row = document.createElement("div")
   row.className = "row"
 
@@ -106,7 +106,7 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   let destinationElement = document.createElement("span")
   destinationElement.innerHTML = destination
   destinationElement.style.cursor = "pointer" // Optional: show pointer on hover
-  destinationElement.onclick = () => goNew(destination)
+  destinationElement.onclick = () => betterGoNew(crs)
 
   let operatorElement = document.createElement("span")
   operatorElement.innerHTML = operator
@@ -415,7 +415,8 @@ function extractTrainDetails(data){
         status: status,
         statusd: statusd,
         origin: detail.origin?.[0]?.description || "Unknown",
-        serviceUid: service.serviceUid
+        serviceUid: service.serviceUid,
+        crs: detail.destination?.[0]?.tiploc
       })
     }
     return results
@@ -616,7 +617,4 @@ async function goNew(name) {
     }
 
   } catch (err) {
-    stnprint.innerHTML = `Error loading station data`
-    console.error(err)
-  }
-}
+    stnprint.innerHTML
