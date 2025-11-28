@@ -617,4 +617,11 @@ async function goNew(name) {
     }
 
   } catch (err) {
-    stnprint.innerHTML
+    stnprint.innerHTML = `Error loading station data`
+    console.error(err)
+  }
+}
+function betterGoNew(crs){
+  station.value = crs
+  run()
+}
