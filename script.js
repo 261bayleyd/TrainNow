@@ -104,9 +104,18 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   };
 
   let destinationElement = document.createElement("span")
-  destinationElement.innerHTML = destination
-  destinationElement.style.cursor = "pointer" // Optional: show pointer on hover
-  destinationElement.onclick = () => betterGoNew(crs)
+  for (let i = 0; i< destination.length; i++){
+    let desE = document.createElement("a")
+    desE.innerHTML = destination[i].description
+    desE.onclick = () => betterGoNew(destination[i].tiploc)
+    if (i != destination.length-1){
+      desE.innerHTML = desE.innerHTML + ", "
+    }
+    destinationElement.appendChild(desE)
+  }
+  // destinationElement.innerHTML = destination
+  // destinationElement.style.cursor = "pointer" // Optional: show pointer on hover
+  // destinationElement.onclick = () => betterGoNew(crs)
 
   let operatorElement = document.createElement("span")
   operatorElement.innerHTML = operator
@@ -389,28 +398,28 @@ function extractTrainDetails(data){
       // else{
       //   des = detail.destination?.[0]?.description || "Unknown"
       // }
-      let des = ""
-      console.log(detail.destination.length)
-      if (detail.destination.length > 1){
-          for (let i = 0; i<detail.destination.length; i++){
-              if (i == 0){
-                  des = des + detail.destination?.[i]?.description
-              }
-              else{
-                  des = des + ", " + detail.destination?.[i]?.description
-              }
-              console.log(des)
-          }
-        }
-        else{
-          des = detail.destination?.[0]?.description || "Unknown"
-        }
+      // let des = ""
+      // console.log(detail.destination.length)
+      // if (detail.destination.length > 1){
+      //     for (let i = 0; i<detail.destination.length; i++){
+      //         if (i == 0){
+      //             des = des + detail.destination?.[i]?.description
+      //         }
+      //         else{
+      //             des = des + ", " + detail.destination?.[i]?.description
+      //         }
+      //         console.log(des)
+      //     }
+      //   }
+      //   else{
+      //     des = detail.destination?.[0]?.description || "Unknown"
+      //   }
       console.log(plt)
       console.log(detail.serviceUid)
       results.push({
         platform: plt || "Unknown",
         realtimeDeparture: dep || "Unknown",
-        destination: des,
+        destination: detail.destination,
         operator: ope || "Unknown",
         status: status,
         statusd: statusd,
@@ -605,23 +614,4 @@ async function goNew(name) {
         s => s.stationName.toLowerCase().includes(input)
       )
       if (containsMatches.length === 1) {
-        match = containsMatches[0]
-      } else if (containsMatches.length > 1) {
-        match = containsMatches.sort((a, b) => a.stationName.length - b.stationName.length)[0]
-      }
-    }
-
-    if (match) {
-      station.value = match.crsCode
-      run()
-    }
-
-  } catch (err) {
-    stnprint.innerHTML = `Error loading station data`
-    console.error(err)
-  }
-}
-function betterGoNew(crs){
-  station.value = crs
-  run()
-}
+        match = conta
