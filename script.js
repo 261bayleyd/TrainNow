@@ -614,4 +614,23 @@ async function goNew(name) {
         s => s.stationName.toLowerCase().includes(input)
       )
       if (containsMatches.length === 1) {
-        match = conta
+        match = containsMatches[0]
+      } else if (containsMatches.length > 1) {
+        match = containsMatches.sort((a, b) => a.stationName.length - b.stationName.length)[0]
+      }
+    }
+
+    if (match) {
+      station.value = match.crsCode
+      run()
+    }
+
+  } catch (err) {
+    stnprint.innerHTML = `Error loading station data`
+    console.error(err)
+  }
+}
+function betterGoNew(crs){
+  station.value = crs
+  run()
+}
