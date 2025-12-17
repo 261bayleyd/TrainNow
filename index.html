@@ -18,7 +18,12 @@
         <button onclick = "backButton()"><h1 style = "margin: 0;">←</h1></button>
         <button onclick = "forwardButton()"><h1 style = "margin: 0;">→</h1></button>
         <br>
-        <input type = "text" id = "station" placeholder = "3 digit station code"><button onclick = "run()">Get Train Times</button>
+        <input type = "text" id = "station" placeholder = "3 digit station code">
+        <select name="Train Times" id="aord">
+            <option value="Departures">Departures</option>
+            <option value="Arrivals">Arrivals</option>
+          </select> 
+          <button onclick = "run()">Get Train Times</button>
         <button onclick = "letterfinder()" id = "3letterfinder" style = "display: block;">Show 3 letter code finder</button><button onclick = "letterfinder()" id = "letterstarter"style="display: none;">Hide 3 letter code finder</button><button onclick="getRandomStation()">Generate random station</button>
         <div id="station-lookup" style="display: none;">
             <h2>UK Station Code Finder</h2>
@@ -35,7 +40,7 @@
             <div id = "titlerow">
                 <span>Platform</span>
                 <span>Origin</span>
-                <span>Departure</span>
+                <span id = "aordprint">Departure</span>
                 <span>Destination</span>
                 <span>Operator</span>
                 <span>Status</span>

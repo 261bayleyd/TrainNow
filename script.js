@@ -1,3 +1,23 @@
+let aord = document.getElementById("aord")
+let aordprint = document.getElementById("aordprint")
+let aordnote = "You are looking at Departures from "
+let arrival = false
+// Listen for changes
+aord.addEventListener('change', function() {
+  if (this.value == "Departures") {
+    console.log("Departures");
+    aordnote = "You are looking at Departures from "
+    aordprint.innerHTML = "Departure"
+    arrival = false
+  }
+  else if(this.value == "Arrivals"){
+    console.log("Arrivals")
+    aordnote = "You are looking at Arrivals for "
+    aordprint.innerHTML = "Arrival"
+    arrival = true
+  }
+  run()
+});
 let table = document.getElementById("table")
 let station = document.getElementById("station")
 let stnprint = document.getElementById("stnprint")
@@ -67,7 +87,7 @@ async function run() {
         newRow(train.platform, train.realtimeDeparture, train.destination, train.operator, train.status, train.statusd, train.origin, train.serviceUid, train.crs)
       }
 
-      stnprint.innerHTML = "You are looking at Departures from " + stationName
+      stnprint.innerHTML = aordnote + stationName
       loadingfile.style.display = 'none'
   }
 // function newRow(platform,departure,destionation,operator){
@@ -162,8 +182,14 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
 //     }
 // }
 async function getData(station) {
+    let response = ""
     try {
-        const response = await fetch('https://api-proxy.thomas-abadines.workers.dev/api/search/' + station);
+        if (arrival == true){
+          response = await fetch('https://api-proxy.thomas-abadines.workers.dev/api/search/' + station + "/arrivals");
+        }
+        else{
+          response = await fetch('https://api-proxy.thomas-abadines.workers.dev/api/search/' + station);
+        }
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -338,19 +364,34 @@ function extractTrainDetails(data){
 
       if (service.serviceType == "bus"){
         plt = "BUS"
-        dep = detail.gbttBookedDeparture
+        if (arrival == true){
+          dep = detail.gbttBookedArrival
+        }
+        else{
+          dep = detail.gbttBookedDeparture
+        }
         status = "No info"
         statusd = ""
       }
       else if (service.serviceType == "ship"){
         plt = "SHIP"
-        dep = detail.gbttBookedDeparture
+        if (arrival == true){
+          dep = detail.gbttBookedArrival
+        }
+        else{
+          dep = detail.gbttBookedDeparture
+        }
         status = "No info"
         statusd = ""
       }
       else{
         plt = detail.platform + location
-        dep = detail.gbttBookedDeparture
+        if (arrival == true){
+          dep = detail.gbttBookedArrival
+        }
+        else{
+          dep = detail.gbttBookedDeparture
+        }
         if (detail.platform == null){
           plt = "No info"
         }

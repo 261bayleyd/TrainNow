@@ -19,3 +19,15 @@ html {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
   }
+  .container {
+    display: flex;
+    width: 100%;
+  }
+  
+  .left {
+    flex: 4;
+  }
+  
+  .right {
+    flex: 1;
+  }
