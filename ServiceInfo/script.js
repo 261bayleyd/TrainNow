@@ -1,3 +1,7 @@
+let OperatorPrint = document.getElementById("OperatorPrint")
+let PowerPrint = document.getElementById("PowerPrint")
+let IdentityPrint = document.getElementById("IdentityPrint")
+let ClassPrint = document.getElementById("ClassPrint")
 let stops = document.getElementById("stops")
 let serviceUid = document.getElementById("ServiceUid").value
 async function Submit(){
@@ -36,7 +40,21 @@ async function Submit(){
       passenger = " - Empty stock Movement"
       time = data.origin[0].workingTime
     }
-    infotitle.innerHTML = time + " " + data.origin[0].description + " To " + data.destination[0].description + " - " + data.atocName + " - " + powerType + passenger
+    let classp = ""
+    if (data.trainClass == "S"){
+      classp = "Standard Class Only Seating"
+    }
+    else if (data.trainClass == "B"){
+      classp = "First & Standard Class Seating"
+    }
+    else{
+      classp = "First & Standard Class Seating"
+    }
+    OperatorPrint.innerHTML = data.atocName
+    PowerPrint.innerHTML = powerType
+    IdentityPrint.innerHTML = data.runningIdentity
+    ClassPrint.innerHTML = classp
+    infotitle.innerHTML = time + " " + data.origin[0].description + " To " + data.destination[0].description + passenger
     addStations(data)
     stops.style.display = "block"
 }
