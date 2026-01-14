@@ -675,3 +675,95 @@ function betterGoNew(crs){
   station.value = crs
   run()
 }
+// CODE BELOW THIS LINE IS FROM CHATGPT
+// ------------------------------------------------------------------------
+// --- Auto-fill from URL (hash, query, or path) and auto-submit -----------
+(function () {
+  function todayYMD() {
+    const now = new Date();
+    const y = String(now.getFullYear());
+    const m = String(now.getMonth() + 1).padStart(2, "0");
+    const d = String(now.getDate()).padStart(2, "0");
+    return { y, m, d };
+  }
+
+  function tryFromHash() {
+    // Supports: #/crs
+    if (!location.hash) return null;
+    const raw = location.hash.replace(/^#\/?/, "");
+    const parts = raw.split("/").filter(Boolean);
+
+    // if (parts.length >= 1) {
+    //   const [crs] = parts.slice(-1);
+    //   if (/^\d{4}$/.test(y) && /^(0?[1-9]|1[0-2])$/.test(m) && /^(0?[1-9]|[12]\d|3[01])$/.test(d)) {
+    //     return { service, y, m, d };
+    //   }
+    // }
+    if (parts.length >= 1) {
+      let crs = parts[parts.length - 1];
+      return {crs};
+    }
+    return null;
+  }
+
+  // function tryFromQuery() {
+  //   // Supports: ?service=U9018&date=2025/11/08  OR  ?service=U9018 (defaults to today)
+  //   const sp = new URLSearchParams(location.search);
+  //   const service = sp.get("service");
+  //   const date = sp.get("date");
+  //   if (service && date) {
+  //     const m = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+  //     if (m) return { service, y: m[1], m: m[2], d: m[3] };
+  //   }
+  //   if (service && !date) {
+  //     const { y, m, d } = todayYMD();
+  //     return { service, y, m, d };
+  //   }
+  //   return null;
+  // }
+
+  // function tryFromPath() {
+  //   // Supports: …/SERVICE/YYYY/MM/DD  OR  …/SERVICE (defaults to today; needs SPA fallback to work locally)
+  //   const parts = location.pathname.split("/").filter(Boolean);
+
+  //   if (parts.length >= 4) {
+  //     const [service, y, m, d] = parts.slice(-4);
+  //     if (/^\d{4}$/.test(y) && /^(0?[1-9]|1[0-2])$/.test(m) && /^(0?[1-9]|[12]\d|3[01])$/.test(d)) {
+  //       return { service, y, m, d };
+  //     }
+  //   }
+
+  //   if (parts.length >= 1) {
+  //     const last = parts[parts.length - 1];
+  //     // Avoid treating the folder/page name as the service id
+  //     if (last.toLowerCase() !== "serviceinfo") {
+  //       const service = last;
+  //       const { y, m, d } = todayYMD();
+  //       return { service, y, m, d };
+  //     }
+  //   }
+  //   return null;
+  // }
+
+  function applyAndSubmit(found) {
+    if (!found) return;
+    if (!station) return;
+
+    station.value = found.crs;
+
+    run();
+  }
+
+  function initAutofill() {
+    try {
+      const found = tryFromHash()
+      //  || tryFromQuery() || tryFromPath();
+      applyAndSubmit(found);
+    } catch (e) {
+      console.error("Autofill-from-URL failed:", e);
+    }
+  }
+
+  window.addEventListener("load", initAutofill);
+  window.addEventListener("hashchange", initAutofill);
+})();
