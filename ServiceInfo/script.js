@@ -50,7 +50,14 @@ async function Submit(){
     else{
       classp = "First & Standard Class Seating"
     }
-    OperatorPrint.innerHTML = data.atocName
+    let Ope = ""
+    if (data.atocCode == "LD" || data.atocCode == "LF"){
+      Ope = "Lumo"
+    }
+    else{
+      Ope = data.atocName
+    }
+    OperatorPrint.innerHTML = Ope
     PowerPrint.innerHTML = powerType
     IdentityPrint.innerHTML = data.runningIdentity
     ClassPrint.innerHTML = classp
