@@ -94,6 +94,12 @@ function addStations(data){
         let row = document.createElement("div")
         let StationElement = document.createElement("span")
         StationElement.innerHTML = data.locations[i].description + location
+        StationElement.onclick = () => {
+          window.open(
+            `/index.html#${encodeURIComponent(data.locations[i].tiploc)}`,
+            "_blank"
+          );
+        };
 
         let AssociationsElement = document.createElement("span")
         if (data.locations[i].associations != null){
