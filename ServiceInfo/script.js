@@ -96,7 +96,7 @@ function addStations(data){
         StationElement.innerHTML = data.locations[i].description + location
         StationElement.onclick = () => {
           window.open(
-            `/index.html#${encodeURIComponent(data.locations[i].tiploc)}`,
+            `/TrainNow/index.html#${encodeURIComponent(data.locations[i].tiploc)}`,
             "_blank"
           );
         };
