@@ -42,7 +42,20 @@ async function Submit(){
     }
     let classp = ""
     if (data.trainClass == "S"){
-      classp = "Standard Class Only Seating"
+      if (data.sleepers != null){
+        if (data.sleepers == "B"){
+          classp = "First & Standard Class Sleeper Cabins & Standard Class Seating"
+        }
+        else if (data.sleepers == "F"){
+          classp = "First Class Sleeper Cabins & Standard Class Seating"
+        }
+        else if (data.sleepers == "S"){
+          classp = "Standard Class Sleeper Cabins & Standard Class Seating"
+        }
+      }
+      else{
+        classp = "Standard Class Only Seating"
+      }
     }
     else if (data.trainClass == "B"){
       classp = "First & Standard Class Seating"
