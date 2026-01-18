@@ -47,6 +47,17 @@ async function Submit(){
     else if (data.trainClass == "B"){
       classp = "First & Standard Class Seating"
     }
+    else if (data.trainClass == "S"){
+      if (data.sleepers == "B"){
+        classp = "First & Standard Class Sleeper Cabins & Standard Class Seating"
+      }
+      else if (data.sleepers == "F"){
+        classp = "First Class Sleeper Cabins & Standard Class Seating"
+      }
+      else if (data.sleepers == "S"){
+        classp = "Standard Class Sleeper Cabins & Standard Class Seating"
+      }
+    }
     else{
       classp = "First & Standard Class Seating"
     }
