@@ -4,6 +4,16 @@ let IdentityPrint = document.getElementById("IdentityPrint")
 let ClassPrint = document.getElementById("ClassPrint")
 let stops = document.getElementById("stops")
 let serviceUid = document.getElementById("ServiceUid").value
+let currentHost = window.location.hostname;
+let dev
+if (currentHost == "localhost" || currentHost == "127.0.0.1"){
+  dev = true
+  console.log("Dev mode enabled")
+}
+else{
+  dev = false
+  console.log("Prod mode enabled")
+}
 async function Submit(){
     let rows = document.getElementsByClassName("row")
     console.log(rows.length)
@@ -119,11 +129,20 @@ function addStations(data){
         let StationElement = document.createElement("span")
         StationElement.innerHTML = data.locations[i].description + location
         StationElement.onclick = () => {
-          window.open(
+          if(dev == true){
+            window.open(
             `/index.html#${encodeURIComponent(data.locations[i].tiploc)}`,
             "_blank"
           );
+          }
+          if(dev == false){
+            window.open(
+              `/TrainNow/index.html#${encodeURIComponent(data.locations[i].tiploc)}`,
+              "_blank"
+            );
+          }
         };
+        
 
         let AssociationsElement = document.createElement("span")
         if (data.locations[i].associations != null){
