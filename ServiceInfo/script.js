@@ -38,6 +38,9 @@ async function Submit(){
     else if (data.powerType == "DMU" || data.powerType == "D"){
       powerType = "Diesel"
     }
+    else if (data.powerType == "BEMU" || data.powerType == "B"){
+      powerType = "Battery Technology©"
+    }
     else if (data.powerType == null){
       powerType = data.serviceType
     }
