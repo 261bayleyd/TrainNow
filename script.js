@@ -1,3 +1,4 @@
+// Needs to be updated for RTT-API-NG
 let aord = document.getElementById("aord")
 let aordprint = document.getElementById("aordprint")
 let aordnote = "You are looking at Departures from "
