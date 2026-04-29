@@ -185,16 +185,12 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
 async function getData(station) {
     let response = ""
     try {
-        if (arrival == true){
-          response = await fetch('https://api-proxy.thomas-abadines.workers.dev/api/search/' + station + "/arrivals");
-        }
-        else{
-          response = await fetch('https://api-proxy.thomas-abadines.workers.dev/api/search/' + station);
-        }
+        response = await fetch('https://rttnewapi.261bayley.workers.dev/rtt/location?code=gb-nr%3A' + station);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data)
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
