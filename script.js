@@ -306,155 +306,196 @@ function PopularButtons(){
     popularstations.appendChild(button_one2)
   }
 }
+// function extractTrainDetails(data){
+//   let results = []
+//   if (data.services === null) {
+//     console.log("Services is null");
+//     stnprint.innerHTML = "No upcomming departures"
+//   }
+//   else{
+//     for (let i = 0; i < data.services.length; i ++){
+//       let service = data.services[i]
+//       console.log(service)
+//       console.log(i)
+//       let detail = service.locationDetail
+//       let plt = ""
+//       let ope =""
+//       let status
+//       let location
+//       // if (service.serviceType == "bus"){
+//       //   plt = "BUS"
+//       //   dep = detail.gbttBookedDeparture
+//       // }
+//       // else if (service.serviceType == "ship"){
+//       //   plt = "SHIP"
+//       //   dep = detail.gbttBookedDeparture
+//       // }
+//       // else{
+//       //   plt = detail.platform
+//       //   dep = detail.realtimeDeparture
+//       // }
+//       console.log(detail.platform)
+//       if (detail.serviceLocation == "AT_PLAT"){
+//         location = " - At Platform"
+//       }
+//       else if (detail.serviceLocation == "APPR_PLAT"){
+//         location = " - Approaching Platform"
+//       }
+//       else if (detail.serviceLocation == "APPR_STAT"){
+//         location = " - Approaching Station"
+//       }
+//       else if (detail.serviceLocation == "DEP_PREP"){
+//         location = " - Preparing to Depart"
+//       }
+//       else if (detail.serviceLocation == "DEP_READY"){
+//         location = " - Ready to Depart"
+//       }
+//       else if (detail.serviceLocation == null){
+//         location = " "
+//       }
+//       else{
+//         location = " - " + detail.serviceLocation
+//       }
+//       console.log(location)
+//       console.log(service.serviceType)
+
+//       if (service.serviceType == "bus"){
+//         plt = "BUS"
+//         if (arrival == true){
+//           dep = detail.gbttBookedArrival
+//         }
+//         else{
+//           dep = detail.gbttBookedDeparture
+//         }
+//         status = "No info"
+//         statusd = ""
+//       }
+//       else if (service.serviceType == "ship"){
+//         plt = "SHIP"
+//         if (arrival == true){
+//           dep = detail.gbttBookedArrival
+//         }
+//         else{
+//           dep = detail.gbttBookedDeparture
+//         }
+//         status = "No info"
+//         statusd = ""
+//       }
+//       else{
+//         plt = detail.platform + location
+//         if (arrival == true){
+//           dep = detail.gbttBookedArrival
+//         }
+//         else{
+//           dep = detail.gbttBookedDeparture
+//         }
+//         if (detail.platform == null){
+//           plt = "No info"
+//         }
+//       }
+
+//       if (service.atocCode == "LD"){
+//         ope = "Lumo"
+//       }
+//       else{
+//         ope = service.atocName
+//       }
+//       if(detail.realtimeDeparture == detail.gbttBookedDeparture){
+//         if (service.serviceType == "train"){
+//         status = "On Time"
+//         statusd = ""
+//         }
+//       }
+//       else if (detail.realtimeDeparture != detail.gbttBookedDeparture){
+//         if (service.serviceType == "train"){
+//           if (detail.realtimeDeparture == null){
+//             status = "No info"
+//             statusd = ""
+//           }
+//           else{
+//             status = "Exp. " + detail.realtimeDeparture
+//             if (detail.realtimeDeparture > detail.gbttBookedDeparture){
+//               statusd = "Delayed"
+//             }
+//             else{
+//               statusd = "Early"
+//             }
+//           }
+//         }
+//       }
+//       if (detail.displayAs == "CANCELLED_CALL"){
+//         status = "Canceled"
+//         statusd = detail.cancelReasonLongText
+//       }
+//       // let des
+//       // if (detail.destination.length > 1){
+//       //   for (let i; i<detail.destination.length; i++){
+//       //     des = des + ", " + detail.destination?.[i]?.description
+//       //   }
+//       // }
+//       // else{
+//       //   des = detail.destination?.[0]?.description || "Unknown"
+//       // }
+//       // let des = ""
+//       // console.log(detail.destination.length)
+//       // if (detail.destination.length > 1){
+//       //     for (let i = 0; i<detail.destination.length; i++){
+//       //         if (i == 0){
+//       //             des = des + detail.destination?.[i]?.description
+//       //         }
+//       //         else{
+//       //             des = des + ", " + detail.destination?.[i]?.description
+//       //         }
+//       //         console.log(des)
+//       //     }
+//       //   }
+//       //   else{
+//       //     des = detail.destination?.[0]?.description || "Unknown"
+//       //   }
+//       console.log(plt)
+//       console.log(detail.serviceUid)
+//       results.push({
+//         platform: plt || "Unknown",
+//         realtimeDeparture: dep || "Unknown",
+//         destination: detail.destination,
+//         operator: ope || "Unknown",
+//         status: status,
+//         statusd: statusd,
+//         origin: detail.origin?.[0]?.description || "Unknown",
+//         serviceUid: service.serviceUid,
+//         crs: detail.destination?.[0]?.tiploc
+//       })
+//     }
+//     return results
+//   }
+
+// }
 function extractTrainDetails(data){
   let results = []
-  if (data.services === null) {
-    console.log("Services is null");
-    stnprint.innerHTML = "No upcomming departures"
-  }
-  else{
-    for (let i = 0; i < data.services.length; i ++){
-      let service = data.services[i]
-      console.log(service)
-      console.log(i)
-      let detail = service.locationDetail
-      let plt = ""
-      let ope =""
-      let status
-      let location
-      // if (service.serviceType == "bus"){
-      //   plt = "BUS"
-      //   dep = detail.gbttBookedDeparture
-      // }
-      // else if (service.serviceType == "ship"){
-      //   plt = "SHIP"
-      //   dep = detail.gbttBookedDeparture
-      // }
-      // else{
-      //   plt = detail.platform
-      //   dep = detail.realtimeDeparture
-      // }
-      console.log(detail.platform)
-      if (detail.serviceLocation == "AT_PLAT"){
-        location = " - At Platform"
-      }
-      else if (detail.serviceLocation == "APPR_PLAT"){
-        location = " - Approaching Platform"
-      }
-      else if (detail.serviceLocation == "APPR_STAT"){
-        location = " - Approaching Station"
-      }
-      else if (detail.serviceLocation == "DEP_PREP"){
-        location = " - Preparing to Depart"
-      }
-      else if (detail.serviceLocation == "DEP_READY"){
-        location = " - Ready to Depart"
-      }
-      else if (detail.serviceLocation == null){
-        location = " "
-      }
-      else{
-        location = " - " + detail.serviceLocation
-      }
-      console.log(location)
-      console.log(service.serviceType)
+    if (data.services === null) {
+      console.log("Services is null");
+      stnprint.innerHTML = "No upcomming departures"
+    }
+    else{
+      for (let i = 0; i < data.services.length; i ++){
+        let service = data.services[i]
+        console.log(service)
+        console.log(i)
+        let detail = service.locationDetail
+        let plt =""
+        let ope =""
+        let status
+        let location
 
-      if (service.serviceType == "bus"){
-        plt = "BUS"
-        if (arrival == true){
-          dep = detail.gbttBookedArrival
+        // Platform work
+        if (serivcescheduleMetadata.modeType == "BUS"){
+          let platformnumber = "BUS"
         }
-        else{
-          dep = detail.gbttBookedDeparture
+        else if (serivcescheduleMetadata.modeType == "TRAIN"){
+          let platformnumber = service.locationMetadata.platform.actual
         }
-        status = "No info"
-        statusd = ""
-      }
-      else if (service.serviceType == "ship"){
-        plt = "SHIP"
-        if (arrival == true){
-          dep = detail.gbttBookedArrival
-        }
-        else{
-          dep = detail.gbttBookedDeparture
-        }
-        status = "No info"
-        statusd = ""
-      }
-      else{
-        plt = detail.platform + location
-        if (arrival == true){
-          dep = detail.gbttBookedArrival
-        }
-        else{
-          dep = detail.gbttBookedDeparture
-        }
-        if (detail.platform == null){
-          plt = "No info"
-        }
-      }
 
-      if (service.atocCode == "LD"){
-        ope = "Lumo"
-      }
-      else{
-        ope = service.atocName
-      }
-      if(detail.realtimeDeparture == detail.gbttBookedDeparture){
-        if (service.serviceType == "train"){
-        status = "On Time"
-        statusd = ""
-        }
-      }
-      else if (detail.realtimeDeparture != detail.gbttBookedDeparture){
-        if (service.serviceType == "train"){
-          if (detail.realtimeDeparture == null){
-            status = "No info"
-            statusd = ""
-          }
-          else{
-            status = "Exp. " + detail.realtimeDeparture
-            if (detail.realtimeDeparture > detail.gbttBookedDeparture){
-              statusd = "Delayed"
-            }
-            else{
-              statusd = "Early"
-            }
-          }
-        }
-      }
-      if (detail.displayAs == "CANCELLED_CALL"){
-        status = "Canceled"
-        statusd = detail.cancelReasonLongText
-      }
-      // let des
-      // if (detail.destination.length > 1){
-      //   for (let i; i<detail.destination.length; i++){
-      //     des = des + ", " + detail.destination?.[i]?.description
-      //   }
-      // }
-      // else{
-      //   des = detail.destination?.[0]?.description || "Unknown"
-      // }
-      // let des = ""
-      // console.log(detail.destination.length)
-      // if (detail.destination.length > 1){
-      //     for (let i = 0; i<detail.destination.length; i++){
-      //         if (i == 0){
-      //             des = des + detail.destination?.[i]?.description
-      //         }
-      //         else{
-      //             des = des + ", " + detail.destination?.[i]?.description
-      //         }
-      //         console.log(des)
-      //     }
-      //   }
-      //   else{
-      //     des = detail.destination?.[0]?.description || "Unknown"
-      //   }
-      console.log(plt)
-      console.log(detail.serviceUid)
-      results.push({
+        results.push({
         platform: plt || "Unknown",
         realtimeDeparture: dep || "Unknown",
         destination: detail.destination,
@@ -468,10 +509,7 @@ function extractTrainDetails(data){
     }
     return results
   }
-
 }
-
-
 // Random station generator function
 function getRandomStation() {
     if (stns.length === 0) {
@@ -486,7 +524,7 @@ function getRandomStation() {
     run()
 }
 function getStationName(data) {
-    return data?.location?.name || "Unknown Station";
+    return data?.query.location.description || "Unknown Station";
 }
 
 // Station Code Finder Script

@@ -6,8 +6,15 @@ export default {
 
     // A stub is a client Object used to send messages to the Durable Object.
     let dodo = env.ACCESSTOKEN.getByName("access");
+
     let token = dodo.getTokenValue()
-    dodo.setTokenValue()
+    let currentTime = Date.now().toISOString();
+    if (token.validUntil < currentTime){
+      // let newToken = 
+
+      token = dodo.setTokenValue(newToken)
+
+    }
   }}
 
 // Durable Object
@@ -18,9 +25,7 @@ export class AccessToken extends DurableObject {
   }
 
   async setTokenValue(data) {
-    let value = (await this.ctx.storage.get("accessToken")) || null;
-    value = data;
-    await this.ctx.storage.put("accessToken", value);
-    return value;
+    await this.ctx.storage.put("accessToken", data);
+    return data;
   }
 }
