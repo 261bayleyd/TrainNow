@@ -85,7 +85,7 @@ async function run() {
     table.style.display = "block";
       for (let i = train = 0; i < trains.length; i++ ){
         let train = trains[i]
-        newRow(train.platform, train.realtimeDeparture, train.destination, train.operator, train.status, train.statusd, train.origin, train.serviceUid, train.crs)
+        newRow(train.platform, train.realtimeDeparture, train.destination, train.operator, train.status, train.statusd, train.origin, train.serviceUid, train.crs, train.coaches)
       }
 
       stnprint.innerHTML = aordnote + stationName
@@ -109,7 +109,7 @@ async function run() {
 //     row.appendChild(operatorElement)
 //     table.appendChild(row)
 // }
-function newRow(platform, departure, destination, operator, status, statusd, origin, ServiceUid, crs) {
+function newRow(platform, departure, destination, operator, status, statusd, origin, ServiceUid, crs, coaches) {
   let row = document.createElement("div")
   row.className = "row"
 
@@ -127,8 +127,8 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   let destinationElement = document.createElement("span")
   for (let i = 0; i< destination.length; i++){
     let desE = document.createElement("a")
-    desE.innerHTML = destination[i].description
-    desE.onclick = () => betterGoNew(destination[i].tiploc)
+    desE.innerHTML = destination[i].location.description
+    desE.onclick = () => betterGoNew(destination[i].location.longCodes[0])
     if (i != destination.length-1){
       desE.innerHTML = desE.innerHTML + ", "
     }
@@ -142,8 +142,7 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   operatorElement.innerHTML = operator
 
   let statusElement = document.createElement("span")
-  statusElement.innerHTML = status
-  statusElement.title = statusd
+  statusElement.innerHTML = coaches
 
   let originElement = document.createElement("span")
   originElement.innerHTML = origin
@@ -481,30 +480,41 @@ function extractTrainDetails(data){
         let service = data.services[i]
         console.log(service)
         console.log(i)
-        let detail = service.locationDetail
-        let plt =""
-        let ope =""
-        let status
-        let location
 
         // Platform work
-        if (serivcescheduleMetadata.modeType == "BUS"){
+        if (service.scheduleMetadata.modeType == "BUS"){
           let platformnumber = "BUS"
         }
-        else if (serivcescheduleMetadata.modeType == "TRAIN"){
+        else if (service.scheduleMetadata.modeType == "TRAIN"){
           let platformnumber = service.locationMetadata.platform.actual
         }
 
+        // Get correct date and time to display
+        let isoright = ""
+        if (!service.temporalData.departure){
+          isoright = service.temporalData.arrival.realtimeForecast
+        }
+        else{
+          isoright = service.temporalData.departure.realtimeForecast
+        }
+        let displaytime = new Date(isoright)
+        let displayrealtime = displaytime.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        });
+
         results.push({
-        platform: plt || "Unknown",
-        realtimeDeparture: dep || "Unknown",
-        destination: detail.destination,
-        operator: ope || "Unknown",
-        status: status,
-        statusd: statusd,
-        origin: detail.origin?.[0]?.description || "Unknown",
-        serviceUid: service.serviceUid,
-        crs: detail.destination?.[0]?.tiploc
+        platform: service.locationMetadata.platform.forecast || "Unknown",
+        realtimeDeparture: displayrealtime || "Unknown",
+        destination: service.destination,
+        operator: service.scheduleMetadata.operator.name || "Unknown",
+        // status: status,
+        // statusd: statusd,
+        origin: service.origin[0].location.description || "Unknown",
+        serviceUid: service.scheduleMetadata.identity,
+        crs: service.destination[0].location.longCodes[0],
+        coaches: service.locationMetadata.numberOfVehicles
       })
     }
     return results

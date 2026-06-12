@@ -36,11 +36,12 @@ console.log(pathname)
 //   return u.pathname.slice(1) + u.search;
 // }
 // const match = getPathAndQuery()
-let dodo = env.ACCESSTOKEN.getByName("access");
-let token = dodo.getTokenValue()
+let id = env.ACCESSTOKEN.idFromName("access");
+let dodo = env.ACCESSTOKEN.get(id);
+let token = await dodo.getTokenValue()
 let currentTime = new Date().toISOString();
 
-if (!token.validUntil || token.validUntil < currentTime){
+if (!token || !token.validUntil || token.validUntil < currentTime){
       // let newToken = 
     let response = await fetch("https://data.rtt.io/api/get_access_token", {
     headers: {
@@ -48,7 +49,7 @@ if (!token.validUntil || token.validUntil < currentTime){
     },
     });
     let data = await response.json();
-    token = dodo.setTokenValue(data.token)
+    token = await dodo.setTokenValue(data)
     }
 
 // Calling the A-P-I
@@ -60,6 +61,7 @@ targetUrl = `https://data.rtt.io/${pathname}`;
 // targetUrl = `https://data.rtt.io/rtt/location?code=gb-nr%3APAR`;
 }
 let response = await fetch(targetUrl, {
+  // Line above causing issues
 headers: {
 // 'Authorization': 'Basic ' + btoa('rttapi_BayleyDuquetteSF:bb79df0b52901909f8a5349aabccdbb5394b8d7e'),
   'Authorization' : "Bearer " + token.token
