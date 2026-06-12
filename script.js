@@ -3,6 +3,7 @@ let aord = document.getElementById("aord")
 let aordprint = document.getElementById("aordprint")
 let aordnote = "You are looking at Departures from "
 let arrival = false
+let stationName = ""
 // Listen for changes
 aord.addEventListener('change', function() {
   if (this.value == "Departures") {
@@ -128,12 +129,12 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   for (let i = 0; i< destination.length; i++){
     let desE = document.createElement("a")
 
-    // if(destination[i].location.description == stationName){
-    //   desE.innerHTML = "Terminates Here"
-    // }
-    // else{
+    if(destination[i].location.description == stationName){
+      desE.innerHTML = "Terminates Here"
+    }
+    else{
       desE.innerHTML = destination[i].location.description
-    // }
+    }
 
     desE.onclick = () => betterGoNew(destination[i].location.longCodes[0])
     if (i != destination.length-1){
@@ -152,12 +153,12 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   statusElement.innerHTML = coaches
 
   let originElement = document.createElement("span")
-  // if(origin == stationName){
-  //   originElement.innerHTML = "Starts Here"
-  // }
-  // else{
+  if(origin == stationName){
+    originElement.innerHTML = "Starts Here"
+  }
+  else{
     originElement.innerHTML = origin
-  // }
+  }
   originElement.style.cursor = "pointer" // Optional: show pointer on hover
   originElement.onclick = () => goNew(origin)
 
@@ -515,12 +516,13 @@ function extractTrainDetails(data){
           minute: '2-digit',
           hour12: false
         });
-
-
+        let extrainfo = ""
+        if (service.temporalData.status){
+          extrainfo = " - " + service.temporalData.status
+        }
         
         results.push({
-        platform: service.locationMetadata?.platform?.forecast ?? service.locationMetadata?.platform?.planned ?? "-",
-        realtimeDeparture: displayrealtime || "-",
+        platform: `${service.locationMetadata?.platform?.forecast ?? service.locationMetadata?.platform?.planned ?? "-"}${extrainfo ?? ""}`,        realtimeDeparture: displayrealtime || "-",
         destination: service.destination,
         operator: service.scheduleMetadata.operator.name || "Network Rail",
         // status: status,
@@ -528,7 +530,7 @@ function extractTrainDetails(data){
         origin: service.origin[0].location.description || "-",
         serviceUid: service.scheduleMetadata.identity,
         crs: service.destination[0].location.longCodes[0],
-        coaches: service.locationMetadata.numberOfVehicles
+        coaches: service.locationMetadata.numberOfVehicles || "-"
       })
     }
     return results
@@ -548,6 +550,7 @@ function getRandomStation() {
     run()
 }
 function getStationName(data) {
+    stationName = data?.query.location.description || "Unknown Station";
     return data?.query.location.description || "Unknown Station";
 }
 
