@@ -127,7 +127,14 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   let destinationElement = document.createElement("span")
   for (let i = 0; i< destination.length; i++){
     let desE = document.createElement("a")
-    desE.innerHTML = destination[i].location.description
+
+    // if(destination[i].location.description == stationName){
+    //   desE.innerHTML = "Terminates Here"
+    // }
+    // else{
+      desE.innerHTML = destination[i].location.description
+    // }
+
     desE.onclick = () => betterGoNew(destination[i].location.longCodes[0])
     if (i != destination.length-1){
       desE.innerHTML = desE.innerHTML + ", "
@@ -145,7 +152,12 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   statusElement.innerHTML = coaches
 
   let originElement = document.createElement("span")
-  originElement.innerHTML = origin
+  // if(origin == stationName){
+  //   originElement.innerHTML = "Starts Here"
+  // }
+  // else{
+    originElement.innerHTML = origin
+  // }
   originElement.style.cursor = "pointer" // Optional: show pointer on hover
   originElement.onclick = () => goNew(origin)
 
@@ -482,12 +494,12 @@ function extractTrainDetails(data){
         console.log(i)
 
         // Platform work
-        if (service.scheduleMetadata.modeType == "BUS"){
-          let platformnumber = "BUS"
-        }
-        else if (service.scheduleMetadata.modeType == "TRAIN"){
-          let platformnumber = service.locationMetadata.platform.actual
-        }
+        // if (service.scheduleMetadata.modeType == "BUS"){
+        //   let platformnumber = "BUS"
+        // }
+        // else if (service.scheduleMetadata.modeType == "TRAIN"){
+        //   let platformnumber = service.locationMetadata.platform.actual
+        // }
 
         // Get correct date and time to display
         let isoright = ""
@@ -504,14 +516,16 @@ function extractTrainDetails(data){
           hour12: false
         });
 
+
+        
         results.push({
-        platform: service.locationMetadata.platform.forecast || "Unknown",
-        realtimeDeparture: displayrealtime || "Unknown",
+        platform: service.locationMetadata?.platform?.forecast ?? service.locationMetadata?.platform?.planned ?? "-",
+        realtimeDeparture: displayrealtime || "-",
         destination: service.destination,
-        operator: service.scheduleMetadata.operator.name || "Unknown",
+        operator: service.scheduleMetadata.operator.name || "Network Rail",
         // status: status,
         // statusd: statusd,
-        origin: service.origin[0].location.description || "Unknown",
+        origin: service.origin[0].location.description || "-",
         serviceUid: service.scheduleMetadata.identity,
         crs: service.destination[0].location.longCodes[0],
         coaches: service.locationMetadata.numberOfVehicles
