@@ -503,26 +503,41 @@ function extractTrainDetails(data){
         // }
 
         // Get correct date and time to display
-        let isoright = ""
-        if (!service.temporalData.departure){
-          isoright = service.temporalData.arrival.realtimeForecast
+        let timeData = service.temporalData?.departure || service.temporalData?.arrival || {}
+        let isoright = timeData.realtimeForecast || timeData.scheduleAdvertised || timeData.scheduleInternal || ""
+        let displayrealtime = "-"
+
+        if (isoright) {
+          let displaytime = new Date(isoright)
+          displayrealtime = displaytime.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          })
         }
-        else{
-          isoright = service.temporalData.departure.realtimeForecast
-        }
-        let displaytime = new Date(isoright)
-        let displayrealtime = displaytime.toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false
-        });
         let extrainfo = ""
         if (service.temporalData.status){
           extrainfo = " - " + service.temporalData.status
         }
+        // let pltmode =""
+        // if (service.scheduleMetadata.modeType!="TRAIN"){
+        //   pltmode = service.modeType
+        // }
         
-        results.push({
-        platform: `${service.locationMetadata?.platform?.forecast ?? service.locationMetadata?.platform?.planned ?? "-"}${extrainfo ?? ""}`,        realtimeDeparture: displayrealtime || "-",
+        // results.push({
+        // platform: `${service.locationMetadata?.platform?.forecast ?? service.locationMetadata?.platform?.planned ?? "-"}${extrainfo ?? ""}`,realtimeDeparture: displayrealtime ?? pltmode ?? "-",
+        let plt = ""
+
+if (service.scheduleMetadata?.modeType != "TRAIN") {
+  plt = service.scheduleMetadata?.modeType || service.modeType || "-"
+}
+else {
+  plt = `${service.locationMetadata?.platform?.forecast ?? service.locationMetadata?.platform?.planned ?? "-"}${extrainfo ?? ""}`
+}
+
+results.push({
+platform: plt,
+        realtimeDeparture: displayrealtime || "-",
         destination: service.destination,
         operator: service.scheduleMetadata.operator.name || "Network Rail",
         // status: status,
