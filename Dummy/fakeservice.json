@@ -1,0 +1,195 @@
+{
+    "systemStatus": {
+      "realtimeNetworkRail": "OK",
+      "rttCore": "OK"
+    },
+    "query": {
+      "uniqueIdentity": "gb-nr:L01525:2025-10-26"
+    },
+    "service": {
+      "scheduleMetadata": {
+        "uniqueIdentity": "gb-nr:L01525:2025-10-26",
+        "namespace": "gb-nr",
+        "identity": "L01525",
+        "departureDate": "2025-10-26",
+        "operator": {
+          "code": "SW",
+          "name": "South Western Railway"
+        },
+        "modeType": "TRAIN",
+        "inPassengerService": true,
+        "allocations": {}
+      },
+      "locations": [
+        {
+          "temporalData": {
+            "arrival": {
+              "scheduleInternal": "2026-09-24T01:02:06.404Z",
+              "scheduleAdvertised": "2026-09-24T01:02:06.404Z",
+              "realtimeForecast": "2026-09-24T01:02:06.404Z",
+              "realtimeEstimate": "2026-09-24T01:02:06.404Z",
+              "realtimeNoReport": false,
+              "realtimeActual": "2026-09-24T01:02:06.404Z",
+              "realtimeInternalLateness": 5,
+              "realtimeAdvertisedLateness": 0,
+              "isCancelled": true,
+              "cancellationReasonCode": "string"
+            },
+            "departure": {
+              "scheduleInternal": "2026-09-24T01:02:06.404Z",
+              "scheduleAdvertised": "2026-09-24T01:02:06.404Z",
+              "realtimeForecast": "2026-09-24T01:02:06.404Z",
+              "realtimeEstimate": "2026-09-24T01:02:06.404Z",
+              "realtimeNoReport": false,
+              "realtimeActual": "2026-09-24T01:02:06.404Z",
+              "realtimeInternalLateness": 5,
+              "realtimeAdvertisedLateness": 0,
+              "isCancelled": true,
+              "cancellationReasonCode": "string"
+            },
+            "pass": {
+              "scheduleInternal": "2026-09-24T01:02:06.404Z",
+              "scheduleAdvertised": "2026-09-24T01:02:06.404Z",
+              "realtimeForecast": "2026-09-24T01:02:06.404Z",
+              "realtimeEstimate": "2026-09-24T01:02:06.404Z",
+              "realtimeNoReport": false,
+              "realtimeActual": "2026-09-24T01:02:06.404Z",
+              "realtimeInternalLateness": 5,
+              "realtimeAdvertisedLateness": 0,
+              "isCancelled": true,
+              "cancellationReasonCode": "string"
+            },
+            "scheduledCallType": "ADVERTISED_OPEN",
+            "realtimeCallType": "ADVERTISED_OPEN",
+            "displayAs": "CALL",
+            "status": "APPROACHING",
+            "isInterpolated": false
+          },
+          "locationMetadata": {
+            "platform": {
+              "planned": "1",
+              "forecast": null,
+              "actual": "2"
+            },
+            "line": {
+              "planned": "1",
+              "forecast": null,
+              "actual": "2"
+            },
+            "path": {
+              "planned": "1",
+              "forecast": null,
+              "actual": "2"
+            },
+            "numberOfVehicles": 0,
+            "allocationIndex": 0,
+            "isRequestStop": true
+          },
+          "location": {
+            "namespace": "gb-nr",
+            "description": "Clapham Junction",
+            "shortCodes": [
+              "CLJ"
+            ],
+            "longCodes": [
+              "CLPHMJN",
+              "CLPHMJ2",
+              "CLPHMJM",
+              "CLPHMJW",
+              "CLPHMJC"
+            ]
+          },
+          "associatedServices": [
+            {
+              "associationData": {
+                "associationType": "JOIN_FROM",
+                "isPublic": true
+              },
+              "scheduleMetadata": {
+                "uniqueIdentity": "gb-nr:L01525:2025-10-26",
+                "namespace": "gb-nr",
+                "identity": "L01525",
+                "departureDate": "2025-10-26",
+                "operator": {
+                  "code": "SW",
+                  "name": "South Western Railway"
+                },
+                "modeType": "TRAIN",
+                "inPassengerService": true,
+                "allocations": {}
+              }
+            }
+          ]
+        }
+      ],
+      "origin": [
+        {
+          "location": {
+            "namespace": "gb-nr",
+            "description": "Clapham Junction",
+            "shortCodes": [
+              "CLJ"
+            ],
+            "longCodes": [
+              "CLPHMJN",
+              "CLPHMJ2",
+              "CLPHMJM",
+              "CLPHMJW",
+              "CLPHMJC"
+            ]
+          },
+          "temporalData": {
+            "scheduleInternal": "2026-09-24T01:02:06.404Z",
+            "scheduleAdvertised": "2026-09-24T01:02:06.404Z",
+            "realtimeForecast": "2026-09-24T01:02:06.404Z",
+            "realtimeEstimate": "2026-09-24T01:02:06.404Z",
+            "realtimeNoReport": false,
+            "realtimeActual": "2026-09-24T01:02:06.404Z",
+            "realtimeInternalLateness": 5,
+            "realtimeAdvertisedLateness": 0,
+            "isCancelled": true,
+            "cancellationReasonCode": "string"
+          }
+        }
+      ],
+      "destination": [
+        {
+          "location": {
+            "namespace": "gb-nr",
+            "description": "Clapham Junction",
+            "shortCodes": [
+              "CLJ"
+            ],
+            "longCodes": [
+              "CLPHMJN",
+              "CLPHMJ2",
+              "CLPHMJM",
+              "CLPHMJW",
+              "CLPHMJC"
+            ]
+          },
+          "temporalData": {
+            "scheduleInternal": "2026-09-24T01:02:06.404Z",
+            "scheduleAdvertised": "2026-09-24T01:02:06.404Z",
+            "realtimeForecast": "2026-09-24T01:02:06.404Z",
+            "realtimeEstimate": "2026-09-24T01:02:06.404Z",
+            "realtimeNoReport": false,
+            "realtimeActual": "2026-09-24T01:02:06.404Z",
+            "realtimeInternalLateness": 5,
+            "realtimeAdvertisedLateness": 0,
+            "isCancelled": true,
+            "cancellationReasonCode": "string"
+          }
+        }
+      ],
+      "reasons": [
+        {
+          "type": "DELAY",
+          "code": "TB",
+          "system": "TRUST",
+          "shortText": "TOC request",
+          "longText": "At the request of the train operator."
+        }
+      ]
+    }
+  }

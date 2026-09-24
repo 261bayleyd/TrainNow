@@ -211,14 +211,16 @@ function addStations(data){
         stops.appendChild(row)
     }
 }
+// rtt/service?uniqueIdentity=gb-nr%3AL01525%3A2025-10-26
 async function getServiceInfo(serviceUid,date) {
     try {
-        const response = await fetch('https://api-proxy.thomas-abadines.workers.dev/api/service/' + serviceUid + "/" + date);
-        console.log('https://api-proxy.thomas-abadines.workers.dev/api/service/' + serviceUid + "/" + date)
+        const response = await fetch('https://rttnewapi.261bayley.workers.dev/rtt/service?uniqueIdentity=gb-nr%3AL01525%3A2025-10-26');
+        // console.log('https://api-proxy.thomas-abadines.workers.dev/api/service/' + serviceUid + "/" + date)
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data)
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
