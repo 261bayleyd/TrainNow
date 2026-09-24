@@ -72,9 +72,9 @@ async function run() {
       const data = await getData(station.value);
       let stationName = getStationName(data);
       console.log(stationName)
-      if (data?.services === null) {
-        stnprint.innerHTML == "No upcomming departures from "+ stationName + "."
-        loadingfile.style.display = 'none'
+      if (!data?.services) {
+        stnprint.innerHTML = "No upcoming departures from " + stationName + ".";
+        loadingfile.style.display = "none";
       }
       
     if (!data) return;

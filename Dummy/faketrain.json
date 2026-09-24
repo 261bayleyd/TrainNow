@@ -1,0 +1,62 @@
+{
+    "temporalData": {
+        "departure": {
+            "scheduleInternal": "2026-06-29T10:23:00",
+            "scheduleAdvertised": "2026-06-29T10:23:00",
+            "realtimeForecast": "2026-06-29T10:23:00",
+            "isCancelled": false
+        },
+        "scheduledCallType": "ADVERTISED_PICK_UP",
+        "realtimeCallType": "ADVERTISED_PICK_UP",
+        "displayAs": "CALL",
+        "isInterpolated": false
+    },
+    "locationMetadata": {
+        "platform": {
+            "planned": "STREET",
+            "forecast": "STREET"
+        },
+        "numberOfVehicles": 0,
+        "allocationIndex": 0
+    },
+    "scheduleMetadata": {
+        "uniqueIdentity": "gb-nr:L84582:2026-06-29",
+        "namespace": "gb-nr",
+        "identity": "FOOT",
+        "departureDate": "2026-06-29",
+        "operator": {
+            "code": "UU",
+            "name": "WALK"
+        },
+        "modeType": "FOOT",
+        "inPassengerService": true
+    },
+    "origin": [
+        {
+            "location": {
+                "description": "Windsor & Eton Riverside",
+                "longCodes": [
+                    "WSORAER"
+                ]
+            },
+            "temporalData": {
+                "scheduleInternal": "2026-06-29T10:23:00",
+                "scheduleAdvertised": "2026-06-29T10:23:00"
+            }
+        }
+    ],
+    "destination": [
+        {
+            "location": {
+                "description": "Windsor & Eton Central",
+                "longCodes": [
+                    "WATRLMN"
+                ]
+            },
+            "temporalData": {
+                "scheduleInternal": "2026-06-29T11:19:00",
+                "scheduleAdvertised": "2026-06-29T11:19:00"
+            }
+        }
+    ]
+}
