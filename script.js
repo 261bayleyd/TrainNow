@@ -517,7 +517,24 @@ function extractTrainDetails(data){
         }
         let extrainfo = ""
         if (service.temporalData.status){
-          extrainfo = " - " + service.temporalData.status
+          if (service.temporalData.status == "ARRIVING"){
+            extrainfo = " - " + "Arriving"
+          }
+          else if (service.temporalData.status == "DEPART_READY"){
+            extrainfo = " - " + "Ready to Depart"
+          }
+          else if (service.temporalData.status == "AT_PLATFORM"){
+            extrainfo = " - " + "At the Platform"
+          }
+          else if (service.temporalData.status == "APPROACHING"){
+            extrainfo = " - " + "Approaching"
+          }
+          else if (service.temporalData.status == "DEPART_PREPARING"){
+            extrainfo = " - " + "Preparing to Depart"
+          }
+          else{
+            extrainfo = " - " + service.temporalData.status
+          }
         }
         // let pltmode =""
         // if (service.scheduleMetadata.modeType!="TRAIN"){
