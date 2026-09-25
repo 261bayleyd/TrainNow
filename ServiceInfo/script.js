@@ -2,6 +2,7 @@ let OperatorPrint = document.getElementById("OperatorPrint")
 let PowerPrint = document.getElementById("PowerPrint")
 let IdentityPrint = document.getElementById("IdentityPrint")
 let ClassPrint = document.getElementById("ClassPrint")
+let noticePrint = document.getElementById("notice")
 let stops = document.getElementById("stops")
 let serviceUid = document.getElementById("ServiceUid").value
 let currentHost = window.location.hostname;
@@ -25,80 +26,24 @@ async function Submit(){
       // }
       document.querySelectorAll(".row").forEach(e => e.remove())
     }
-    let serviceUid = document.getElementById("ServiceUid").value
-    let date = document.getElementById("date").value
+    let uniqueIdentity = document.getElementById("ServiceUid").value
     let infotitle = document.getElementById("infotitle")
-    let data = await getServiceInfo(serviceUid,date)
+    let data = await getServiceInfo(uniqueIdentity)
     console.log(data)
     let powerType
-    console.log(data.origin[0].description)
-    if (data.powerType == "EMU" || data.powerType == "E"){
-      powerType = "Electric"
+    let notice
+    if (data.service.scheduleMetadata.inPassengerService == false){
+      notice = notice + "Notice: This Train is not in Revenue Passenger Service"
     }
-    else if (data.powerType == "DMU" || data.powerType == "D"){
-      powerType = "Diesel"
-    }
-    else if (data.powerType == "BEMU" || data.powerType == "B"){
-      powerType = "Battery Technology©"
-    }
-    else if (data.powerType == null){
-      powerType = data.serviceType
-    }
-    else{
-      powerType = data.powerType
-    }
-    let passenger = ""
-    let time = data.origin[0].publicTime
-    if (data.isPassenger != true){
-      passenger = " - Empty stock Movement"
-      time = data.origin[0].workingTime
-    }
+    let time = data.locations[0].temporalData.departure.scheduleAdvertised.slice(11, 16);
     let classp = ""
-    if (data.trainClass == "S"){
-      if (data.sleepers != null){
-        if (data.sleepers == "B"){
-          classp = "First & Standard Class Sleeper Cabins & Standard Class Seating"
-        }
-        else if (data.sleepers == "F"){
-          classp = "First Class Sleeper Cabins & Standard Class Seating"
-        }
-        else if (data.sleepers == "S"){
-          classp = "Standard Class Sleeper Cabins & Standard Class Seating"
-        }
-      }
-      else{
-        classp = "Standard Class Only Seating"
-      }
-    }
-    else if (data.trainClass == "B"){
-      classp = "First & Standard Class Seating"
-    }
-    else if (data.trainClass == "S"){
-      if (data.sleepers == "B"){
-        classp = "First & Standard Class Sleeper Cabins & Standard Class Seating"
-      }
-      else if (data.sleepers == "F"){
-        classp = "First Class Sleeper Cabins & Standard Class Seating"
-      }
-      else if (data.sleepers == "S"){
-        classp = "Standard Class Sleeper Cabins & Standard Class Seating"
-      }
-    }
-    else{
-      classp = "First & Standard Class Seating"
-    }
-    let Ope = ""
-    if (data.atocCode == "LD" || data.atocCode == "LF"){
-      Ope = "Lumo"
-    }
-    else{
-      Ope = data.atocName
-    }
+    let Ope = data.service.scheduleMetadata.operator.name
     OperatorPrint.innerHTML = Ope
     PowerPrint.innerHTML = powerType
     IdentityPrint.innerHTML = data.runningIdentity
     ClassPrint.innerHTML = classp
-    infotitle.innerHTML = time + " " + data.origin[0].description + " To " + data.destination[0].description + passenger
+    noticePrint.innerHTML = notice
+    infotitle.innerHTML = time + " " + data.origin[0].description + " To " + data.destination[0].description + " "
     addStations(data)
     stops.style.display = "block"
 }
@@ -212,9 +157,9 @@ function addStations(data){
     }
 }
 // rtt/service?uniqueIdentity=gb-nr%3AL01525%3A2025-10-26
-async function getServiceInfo(serviceUid,date) {
+async function getServiceInfo(uniqueIdentity) {
     try {
-        const response = await fetch('https://rttnewapi.261bayley.workers.dev/rtt/service?uniqueIdentity=gb-nr%3AL01525%3A2025-10-26');
+        const response = await fetch('https://rttnewapi.261bayley.workers.dev/rtt/service?uniqueIdentity=' + uniqueIdentity);
         // console.log('https://api-proxy.thomas-abadines.workers.dev/api/service/' + serviceUid + "/" + date)
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
