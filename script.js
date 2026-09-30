@@ -560,7 +560,7 @@ platform: plt,
         // status: status,
         // statusd: statusd,
         origin: service.origin[0].location.description || "-",
-        serviceUid: service.scheduleMetadata.identity,
+        serviceUid: service.scheduleMetadata.uniqueIdentity,
         crs: service.destination[0].location.longCodes[0],
         coaches: service.locationMetadata.numberOfVehicles || "-"
       })

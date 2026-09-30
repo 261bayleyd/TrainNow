@@ -34,15 +34,13 @@ async function Submit(){
     if (data.service.scheduleMetadata.inPassengerService == false){
       notice = notice + "Notice: This Train is not in Revenue Passenger Service"
     }
-    let time = data.locations[0].temporalData.departure.scheduleAdvertised.slice(11, 16);
     let classp = ""
     let Ope = data.service.scheduleMetadata.operator.name
     OperatorPrint.innerHTML = Ope
-    PowerPrint.innerHTML = powerType
     IdentityPrint.innerHTML = data.runningIdentity
     ClassPrint.innerHTML = classp
     noticePrint.innerHTML = notice
-    infotitle.innerHTML = time + " " + data.origin[0].description + " To " + data.destination[0].description + " "
+    infotitle.innerHTML = data.service.origin[0].location.description + " To " + data.service.destination[0].location.description + " "
     addStations(data)
     stops.style.display = "block"
 }
