@@ -30,7 +30,6 @@ async function Submit(){
     let infotitle = document.getElementById("infotitle")
     let data = await getServiceInfo(uniqueIdentity)
     console.log(data)
-    let powerType
     let notice
     if (data.service.scheduleMetadata.inPassengerService == false){
       notice = notice + "Notice: This Train is not in Revenue Passenger Service"
