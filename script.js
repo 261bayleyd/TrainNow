@@ -122,7 +122,7 @@ function newRow(platform, departure, destination, operator, status, statusd, ori
   departureElement.style.cursor = "pointer"; // make it obvious it's clickable
   departureElement.title = `Open service ${ServiceUid}`;
   departureElement.onclick = () => {
-    window.open(`./ServiceInfo/index.html#/${encodeURIComponent(ServiceUid)}`, "_blank");
+    window.open(`./ServiceInfo/index.html?service=${encodeURIComponent(ServiceUid)}`, "_blank");
   };
 
   let destinationElement = document.createElement("span")

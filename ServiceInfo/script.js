@@ -1,7 +1,5 @@
 let OperatorPrint = document.getElementById("OperatorPrint")
-let PowerPrint = document.getElementById("PowerPrint")
 let IdentityPrint = document.getElementById("IdentityPrint")
-let ClassPrint = document.getElementById("ClassPrint")
 let noticePrint = document.getElementById("notice")
 let stops = document.getElementById("stops")
 let serviceUid = document.getElementById("ServiceUid").value
@@ -38,7 +36,6 @@ async function Submit(){
     let Ope = data.service.scheduleMetadata.operator.name
     OperatorPrint.innerHTML = Ope
     IdentityPrint.innerHTML = data.runningIdentity
-    ClassPrint.innerHTML = classp
     noticePrint.innerHTML = notice
     infotitle.innerHTML = data.service.origin[0].location.description + " To " + data.service.destination[0].location.description + " "
     addStations(data)
@@ -46,64 +43,63 @@ async function Submit(){
 }
 function addStations(data){
     let location
-    for (let i=0; i<data.locations.length; i++){
-            location = " - " + data.locations[i].temporalData.status
-          }
-
-
+    for (let i=0; i<data.service.locations.length; i++){
+            location = " - " + data.service.locations[i].temporalData.status
         let row = document.createElement("div")
         let StationElement = document.createElement("span")
-        StationElement.innerHTML = data.locations[i].location.description + location
+        StationElement.innerHTML = data.service.locations[i].location.description
+        // + location
         StationElement.onclick = () => {
           if(dev == true){
             window.open(
-            `/index.html#${encodeURIComponent(data.locations[i].location.shortCodes[0])}`,
+            `/index.html#${encodeURIComponent(data.service.locations[i].location.shortCodes[0])}`,
             "_blank"
           );
           }
           if(dev == false){
             window.open(
-              `/TrainNow/index.html#${encodeURIComponent(data.locations[i].location.shortCodes[0])}`,
+              `/TrainNow/index.html#${encodeURIComponent(data.service.locations[i].location.shortCodes[0])}`,
               "_blank"
             );
           }
         };
         
 
-        let AssociationsElement = document.createElement("span")
-        if (data.locations[i].associations != null){
+        // let AssociationsElement = document.createElement("span")
+        // if (data.locations[i].associations != null){
 
-            for (let j=0;j<data.locations[i].associations.length; j++){
-              let Divide = document.createElement("a")
+        //     for (let j=0;j<data.locations[i].associations.length; j++){
+        //       let Divide = document.createElement("a")
 
-              Divide.onclick = () => {
-                  document.getElementById("ServiceUid").value = data.locations[i].associations[j].associatedUid
-                  Submit()
-                }
-              AssociationsElement.appendChild(Divide)
-          }
-        }
+        //       Divide.onclick = () => {
+        //           document.getElementById("ServiceUid").value = data.locations[i].associations[j].associatedUid
+        //           Submit()
+        //         }
+        //       AssociationsElement.appendChild(Divide)
+        //   }
+        // }
 
         let ArrivalElement = document.createElement("span")
-        ArrivalElement.innerHTML = data.locations[i].gbttBookedArrival ?? "";
+        ArrivalElement.innerHTML = data.service.locations[i].temporalData?.arrival?.realtimeActual?.slice(11, 16) ?? data.service.locations[i].temporalData?.arrival?.realtimeForecast?.slice(11, 16) ?? "";
 
         let departureElement = document.createElement("span")
-        departureElement.innerHTML = data.locations[i].gbttBookedDeparture ?? "";
+        departureElement.innerHTML = data.service.locations[i].temporalData?.departure?.realtimeActual?.slice(11, 16) ?? data.service.locations[i].temporalData?.departure?.realtimeForecast?.slice(11, 16) ?? "";
 
         let PlatformElement = document.createElement("span")
-        PlatformElement.innerHTML = data.locations[i].platform ?? "No info";
+        PlatformElement.innerHTML = data.service.locations[i].locationMetadata?.platform?.actual ?? data.service.locations[i].locationMetadata?.platform?.forecast ?? data.service.locations[i].locationMetadata?.platform?.planned ?? "No info";
 
         let DelayElement = document.createElement("span")
-        if (data.locations[i].displayAs == "CANCELLED_CALL"){
+        if (data.service.locations[i].temporalData.displayAs == "CANCELLED_CALL"){
             DelayElement.innerHTML = "Canceled"
-            DelayElement.title = data.locations[i].cancelReasonLongText
+            // DelayElement.title = data.locations[i].cancelReasonLongText
           }
         else{
-            DelayElement.innerHTML = data.locations[i].realtimeGbttArrivalLateness ?? data.locations[i].realtimeGbttDepartureLateness ?? ""
+            DelayElement.innerHTML = data.service.locations[i].temporalData?.departure?.realtimeInternalLateness ?? ""
+          // DelayElement.innerHTML = data.service.locations[i].realtimeGbttArrivalLateness ?? data.service.locations[i].realtimeGbttDepartureLateness ?? ""
         }
 
         row.appendChild(StationElement)
-        row.appendChild(AssociationsElement)
+        // row.appendChild(AssociationsElement)
         row.appendChild(ArrivalElement)
         row.appendChild(departureElement)
         row.appendChild(PlatformElement)
@@ -111,6 +107,7 @@ function addStations(data){
 
         row.className = "row"
         stops.appendChild(row)
+                  }
     }
 // }
 // rtt/service?uniqueIdentity=gb-nr%3AL01525%3A2025-10-26
