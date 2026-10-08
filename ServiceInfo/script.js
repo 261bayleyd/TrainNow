@@ -47,42 +47,23 @@ async function Submit(){
 function addStations(data){
     let location
     for (let i=0; i<data.locations.length; i++){
-        if (data.locations[i].serviceLocation == "AT_PLAT"){
-            location = " - At Platform"
+            location = " - " + data.locations[i].temporalData.status
           }
-          else if (data.locations[i].serviceLocation == "APPR_PLAT"){
-            location = " - Approaching Platform"
-          }
-          else if (data.locations[i].serviceLocation == "APPR_STAT"){
-            location = " - Approaching Station"
-          }
-          else if (data.locations[i].serviceLocation == "DEP_PREP"){
-            location = " - Preparing to Depart"
-          }
-          else if (data.locations[i].serviceLocation == "DEP_READY"){
-            location = " - Ready to Depart"
-          }
-          else if (data.locations[i].serviceLocation == null){
-            location = " "
-          }
-          else{
-            location = " - " + data.locations[i].serviceLocation
-          }
-          let AssociationsText
+
 
         let row = document.createElement("div")
         let StationElement = document.createElement("span")
-        StationElement.innerHTML = data.locations[i].description + location
+        StationElement.innerHTML = data.locations[i].location.description + location
         StationElement.onclick = () => {
           if(dev == true){
             window.open(
-            `/index.html#${encodeURIComponent(data.locations[i].tiploc)}`,
+            `/index.html#${encodeURIComponent(data.locations[i].location.shortCodes[0])}`,
             "_blank"
           );
           }
           if(dev == false){
             window.open(
-              `/TrainNow/index.html#${encodeURIComponent(data.locations[i].tiploc)}`,
+              `/TrainNow/index.html#${encodeURIComponent(data.locations[i].location.shortCodes[0])}`,
               "_blank"
             );
           }
@@ -94,28 +75,7 @@ function addStations(data){
 
             for (let j=0;j<data.locations[i].associations.length; j++){
               let Divide = document.createElement("a")
-              if (data.locations[i].associations[j].type == "next") {
-                if (data.locations[0].associations != null &&
-                    data.locations[0].associations[j] &&
-                    data.locations[0].associations[j].type == "next") {
-              
-                  Divide.innerHTML = "This Train was: "
-                    + data.locations[i].associations[j].associatedUid + " "
-                } else {
-                  Divide.innerHTML = "This Train Becomes: "
-                    + data.locations[i].associations[j].associatedUid + " "
-                }
-              }
-              else if (data.locations[i].associations[j].type == "join"){
-                  Divide.innerHTML = "This Train joins with: "
-                   + data.locations[i].associations[j].associatedUid + " "
-              }
-              else if (data.locations[i].associations[j].type == "divide"){
-              Divide.innerHTML = "This Train Divides to: " + data.locations[i].associations[j].associatedUid + " "
-              }
-              else{
-                Divide.innerHTML = data.locations[i].associations[j].type + ": " + data.locations[i].associations[j].associatedUid + " "
-              }
+
               Divide.onclick = () => {
                   document.getElementById("ServiceUid").value = data.locations[i].associations[j].associatedUid
                   Submit()
@@ -152,7 +112,7 @@ function addStations(data){
         row.className = "row"
         stops.appendChild(row)
     }
-}
+// }
 // rtt/service?uniqueIdentity=gb-nr%3AL01525%3A2025-10-26
 async function getServiceInfo(uniqueIdentity) {
     try {
