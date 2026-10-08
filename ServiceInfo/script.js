@@ -165,16 +165,10 @@ async function getServiceInfo(uniqueIdentity) {
   function tryFromQuery() {
     // Supports: ?service=U9018&date=2025/11/08  OR  ?service=U9018 (defaults to today)
     const sp = new URLSearchParams(location.search);
+    console.log(sp)
     const service = sp.get("service");
-    const date = sp.get("date");
-    if (service && date) {
-      const m = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
-      if (m) return { service, y: m[1], m: m[2], d: m[3] };
-    }
-    if (service && !date) {
-      const { y, m, d } = todayYMD();
-      return { service, y, m, d };
-    }
+    console.log(service)
+    return service
     return null;
   }
 
@@ -202,22 +196,23 @@ async function getServiceInfo(uniqueIdentity) {
   }
 
   function applyAndSubmit(found) {
-    if (!found) return;
+    if (!found){
+      console.log("im working")
+      return;
+    }
     const serviceInput = document.getElementById("ServiceUid");
-    const dateInput = document.getElementById("date");
-    if (!serviceInput || !dateInput) return;
+    if (!serviceInput) return;
 
-    const mm = found.m.toString().padStart(2, "0");
-    const dd = found.d.toString().padStart(2, "0");
-    serviceInput.value = found.service;
-    dateInput.value = `${found.y}/${mm}/${dd}`;
+    serviceInput.value = found;
 
     if (typeof Submit === "function") Submit();
   }
 
   function initAutofill() {
     try {
-      const found = tryFromHash() || tryFromQuery() || tryFromPath();
+      console.log("Hello")
+      const found = tryFromQuery() || tryFromPath();
+      // tryFromHash() ||
       applyAndSubmit(found);
     } catch (e) {
       console.error("Autofill-from-URL failed:", e);
