@@ -1,0 +1,769 @@
+{
+    "systemStatus": {
+        "realtimeNetworkRail": "OK",
+        "rttCore": "OK"
+    },
+    "query": {
+        "uniqueIdentity": "gb-nr:C04568:2026-10-15",
+        "detailed": false
+    },
+    "service": {
+        "scheduleMetadata": {
+            "uniqueIdentity": "gb-nr:C04568:2026-10-15",
+            "namespace": "gb-nr",
+            "identity": "C04568",
+            "departureDate": "2026-10-15",
+            "operator": {
+                "code": "CS",
+                "name": "Caledonian Sleeper"
+            },
+            "modeType": "TRAIN",
+            "inPassengerService": true
+        },
+        "locations": [
+            {
+                "temporalData": {
+                    "departure": {
+                        "scheduleInternal": "2026-10-15T21:15:00",
+                        "scheduleAdvertised": "2026-10-15T21:15:00",
+                        "realtimeActual": "2026-10-15T21:15:00",
+                        "realtimeInternalLateness": 0,
+                        "realtimeAdvertisedLateness": 0,
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_PICK_UP",
+                    "realtimeCallType": "ADVERTISED_PICK_UP",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "1",
+                        "actual": "1"
+                    },
+                    "line": {
+                        "planned": "X",
+                        "actual": "X"
+                    },
+                    "numberOfVehicles": 16,
+                    "allocationIndex": 0
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "London Euston",
+                    "shortCodes": [
+                        "EUS"
+                    ],
+                    "longCodes": [
+                        "EUSTON"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-15T22:41:00",
+                        "realtimeActual": "2026-10-15T22:38:00",
+                        "realtimeInternalLateness": -2,
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-15T22:44:00",
+                        "scheduleAdvertised": "2026-10-15T22:42:00",
+                        "realtimeActual": "2026-10-15T22:45:00",
+                        "realtimeInternalLateness": 0,
+                        "realtimeAdvertisedLateness": 3,
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_PICK_UP",
+                    "realtimeCallType": "ADVERTISED_PICK_UP",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "3",
+                        "actual": "3"
+                    },
+                    "numberOfVehicles": 16,
+                    "allocationIndex": 0
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Birmingham International",
+                    "shortCodes": [
+                        "BHI"
+                    ],
+                    "longCodes": [
+                        "BHAMINT"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-15T23:47:00",
+                        "realtimeForecast": "2026-10-15T23:47:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-15T23:50:00",
+                        "scheduleAdvertised": "2026-10-15T23:45:00",
+                        "realtimeForecast": "2026-10-15T23:49:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_PICK_UP",
+                    "realtimeCallType": "ADVERTISED_PICK_UP",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "6",
+                        "forecast": "6"
+                    },
+                    "numberOfVehicles": 16,
+                    "allocationIndex": 0
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Crewe",
+                    "shortCodes": [
+                        "CRE"
+                    ],
+                    "longCodes": [
+                        "CREWE"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T00:48:00",
+                        "realtimeForecast": "2026-10-16T00:47:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T00:58:00",
+                        "scheduleAdvertised": "2026-10-16T00:30:00",
+                        "realtimeForecast": "2026-10-16T00:50:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_PICK_UP",
+                    "realtimeCallType": "ADVERTISED_PICK_UP",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "3",
+                        "forecast": "3"
+                    },
+                    "line": {
+                        "planned": "DSL",
+                        "forecast": "DSL"
+                    },
+                    "path": {
+                        "planned": "DSL",
+                        "forecast": "DSL"
+                    },
+                    "numberOfVehicles": 16,
+                    "allocationIndex": 0
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Preston",
+                    "shortCodes": [
+                        "PRE"
+                    ],
+                    "longCodes": [
+                        "PRST"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T03:47:00",
+                        "realtimeForecast": "2026-10-16T03:46:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T04:20:00",
+                        "realtimeForecast": "2026-10-16T03:51:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "OPERATIONAL_ONLY",
+                    "realtimeCallType": "OPERATIONAL_ONLY",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "2",
+                        "forecast": "2"
+                    },
+                    "line": {
+                        "planned": "Z",
+                        "forecast": "Z"
+                    },
+                    "path": {
+                        "planned": "Z",
+                        "forecast": "Z"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Edinburgh",
+                    "shortCodes": [
+                        "EDB"
+                    ],
+                    "longCodes": [
+                        "EDINBUR"
+                    ]
+                },
+                "associatedServices": [
+                    {
+                        "associationData": {
+                            "associationType": "DIVIDE_INTO",
+                            "isPublic": true
+                        },
+                        "scheduleMetadata": {
+                            "uniqueIdentity": ":C04542:2026-10-16",
+                            "identity": "C04542",
+                            "departureDate": "2026-10-16",
+                            "operator": {
+                                "code": "CS",
+                                "name": "Caledonian Sleeper"
+                            },
+                            "modeType": "TRAIN",
+                            "inPassengerService": true
+                        }
+                    },
+                    {
+                        "associationData": {
+                            "associationType": "DIVIDE_INTO",
+                            "isPublic": true
+                        },
+                        "scheduleMetadata": {
+                            "uniqueIdentity": ":C04576:2026-10-16",
+                            "identity": "C04576",
+                            "departureDate": "2026-10-16",
+                            "operator": {
+                                "code": "CS",
+                                "name": "Caledonian Sleeper"
+                            },
+                            "modeType": "TRAIN",
+                            "inPassengerService": true
+                        }
+                    }
+                ]
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T04:58:00",
+                        "scheduleAdvertised": "2026-10-16T04:59:00",
+                        "realtimeForecast": "2026-10-16T04:29:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T05:00:00",
+                        "realtimeForecast": "2026-10-16T04:30:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "2",
+                        "forecast": "2"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Stirling",
+                    "shortCodes": [
+                        "STG"
+                    ],
+                    "longCodes": [
+                        "STIRLNG"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T05:08:00",
+                        "scheduleAdvertised": "2026-10-16T05:08:00",
+                        "realtimeForecast": "2026-10-16T04:38:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T05:09:00",
+                        "realtimeForecast": "2026-10-16T04:39:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "2",
+                        "forecast": "2"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Dunblane",
+                    "shortCodes": [
+                        "DBL"
+                    ],
+                    "longCodes": [
+                        "DUNANE"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T05:23:00",
+                        "scheduleAdvertised": "2026-10-16T05:24:00",
+                        "realtimeForecast": "2026-10-16T04:53:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T05:25:00",
+                        "realtimeForecast": "2026-10-16T04:54:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "2",
+                        "forecast": "2"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Gleneagles",
+                    "shortCodes": [
+                        "GLE"
+                    ],
+                    "longCodes": [
+                        "GLNEGLS"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T05:42:00",
+                        "scheduleAdvertised": "2026-10-16T05:42:00",
+                        "realtimeForecast": "2026-10-16T05:11:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T05:43:00",
+                        "realtimeForecast": "2026-10-16T05:12:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "7",
+                        "forecast": "7"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Perth",
+                    "shortCodes": [
+                        "PTH"
+                    ],
+                    "longCodes": [
+                        "PERTH"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T06:02:00",
+                        "scheduleAdvertised": "2026-10-16T06:02:00",
+                        "realtimeForecast": "2026-10-16T05:31:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T06:03:00",
+                        "realtimeForecast": "2026-10-16T05:32:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "1",
+                        "forecast": "1"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Dunkeld & Birnam",
+                    "shortCodes": [
+                        "DKD"
+                    ],
+                    "longCodes": [
+                        "DUNKELD"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T06:16:00",
+                        "scheduleAdvertised": "2026-10-16T06:16:00",
+                        "realtimeForecast": "2026-10-16T05:44:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T06:17:00",
+                        "realtimeForecast": "2026-10-16T05:45:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "1",
+                        "forecast": "1"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Pitlochry",
+                    "shortCodes": [
+                        "PIT"
+                    ],
+                    "longCodes": [
+                        "PTLCHRY"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T06:28:00",
+                        "scheduleAdvertised": "2026-10-16T06:28:00",
+                        "realtimeForecast": "2026-10-16T05:56:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T06:29:00",
+                        "realtimeForecast": "2026-10-16T05:57:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "2",
+                        "forecast": "2"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Blair Atholl",
+                    "shortCodes": [
+                        "BLA"
+                    ],
+                    "longCodes": [
+                        "BLARATH"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T06:59:00",
+                        "scheduleAdvertised": "2026-10-16T06:59:00",
+                        "realtimeForecast": "2026-10-16T06:26:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T07:00:00",
+                        "realtimeForecast": "2026-10-16T06:27:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "2",
+                        "forecast": "2"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Dalwhinnie",
+                    "shortCodes": [
+                        "DLW"
+                    ],
+                    "longCodes": [
+                        "DALWHIN"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T07:10:00",
+                        "scheduleAdvertised": "2026-10-16T07:11:00",
+                        "realtimeForecast": "2026-10-16T06:37:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T07:12:00",
+                        "realtimeForecast": "2026-10-16T06:38:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "1",
+                        "forecast": "1"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Newtonmore",
+                    "shortCodes": [
+                        "NWR"
+                    ],
+                    "longCodes": [
+                        "NWTM"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T07:16:00",
+                        "scheduleAdvertised": "2026-10-16T07:16:00",
+                        "realtimeForecast": "2026-10-16T06:42:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T07:17:00",
+                        "scheduleAdvertised": "2026-10-16T07:17:00",
+                        "realtimeForecast": "2026-10-16T07:17:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_OPEN",
+                    "realtimeCallType": "ADVERTISED_OPEN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "1",
+                        "forecast": "1"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Kingussie",
+                    "shortCodes": [
+                        "KIN"
+                    ],
+                    "longCodes": [
+                        "KGUSSIE"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T07:38:00",
+                        "scheduleAdvertised": "2026-10-16T07:39:00",
+                        "realtimeForecast": "2026-10-16T07:38:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T07:43:00",
+                        "scheduleAdvertised": "2026-10-16T07:43:00",
+                        "realtimeForecast": "2026-10-16T07:43:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_OPEN",
+                    "realtimeCallType": "ADVERTISED_OPEN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "1",
+                        "forecast": "1"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Aviemore",
+                    "shortCodes": [
+                        "AVM"
+                    ],
+                    "longCodes": [
+                        "AVIEMRE"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T07:53:00",
+                        "scheduleAdvertised": "2026-10-16T07:53:00",
+                        "realtimeForecast": "2026-10-16T07:53:00",
+                        "isCancelled": false
+                    },
+                    "departure": {
+                        "scheduleInternal": "2026-10-16T07:54:00",
+                        "scheduleAdvertised": "2026-10-16T07:54:00",
+                        "realtimeForecast": "2026-10-16T07:54:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_OPEN",
+                    "realtimeCallType": "ADVERTISED_OPEN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "1",
+                        "forecast": "1"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Carrbridge",
+                    "shortCodes": [
+                        "CAG"
+                    ],
+                    "longCodes": [
+                        "CARRBDG"
+                    ]
+                }
+            },
+            {
+                "temporalData": {
+                    "arrival": {
+                        "scheduleInternal": "2026-10-16T08:35:00",
+                        "scheduleAdvertised": "2026-10-16T08:45:00",
+                        "realtimeForecast": "2026-10-16T08:34:00",
+                        "isCancelled": false
+                    },
+                    "scheduledCallType": "ADVERTISED_SET_DOWN",
+                    "realtimeCallType": "ADVERTISED_SET_DOWN",
+                    "displayAs": "CALL",
+                    "isInterpolated": false
+                },
+                "locationMetadata": {
+                    "platform": {
+                        "planned": "2",
+                        "forecast": "2"
+                    }
+                },
+                "location": {
+                    "namespace": "gb-nr",
+                    "description": "Inverness",
+                    "shortCodes": [
+                        "INV"
+                    ],
+                    "longCodes": [
+                        "IVRNESS"
+                    ]
+                }
+            }
+        ],
+        "origin": [
+            {
+                "location": {
+                    "description": "London Euston",
+                    "longCodes": [
+                        "EUSTON"
+                    ]
+                },
+                "temporalData": {
+                    "scheduleInternal": "2026-10-15T21:15:00",
+                    "scheduleAdvertised": "2026-10-15T21:15:00"
+                }
+            }
+        ],
+        "destination": [
+            {
+                "location": {
+                    "description": "Inverness",
+                    "longCodes": [
+                        "IVRNESS"
+                    ]
+                },
+                "temporalData": {
+                    "scheduleInternal": "2026-10-16T08:35:00",
+                    "scheduleAdvertised": "2026-10-16T08:45:00"
+                }
+            },
+            {
+                "location": {
+                    "description": "Fort William",
+                    "longCodes": [
+                        "FRTWLM"
+                    ]
+                },
+                "temporalData": {
+                    "scheduleInternal": "2026-10-16T09:55:00",
+                    "scheduleAdvertised": "2026-10-16T10:00:00"
+                }
+            },
+            {
+                "location": {
+                    "description": "Aberdeen",
+                    "longCodes": [
+                        "ABRDEEN"
+                    ]
+                },
+                "temporalData": {
+                    "scheduleInternal": "2026-10-16T07:34:00",
+                    "scheduleAdvertised": "2026-10-16T07:50:00"
+                }
+            }
+        ]
+    }
+}

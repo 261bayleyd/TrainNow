@@ -1,3 +1,5 @@
+const ADVERTISED_OPEN = "ADVERTISED_OPEN"
+
 let OperatorPrint = document.getElementById("OperatorPrint")
 let IdentityPrint = document.getElementById("IdentityPrint")
 let noticePrint = document.getElementById("notice")
@@ -97,6 +99,33 @@ function addStations(data){
             DelayElement.innerHTML = data.service.locations[i].temporalData?.departure?.realtimeInternalLateness ?? ""
           // DelayElement.innerHTML = data.service.locations[i].realtimeGbttArrivalLateness ?? data.service.locations[i].realtimeGbttDepartureLateness ?? ""
         }
+        let LocationElement = document.createElement("span")
+        let otherinfo = ""
+        if (data.service.locations[i].temporalData.status == "AT_PLATFORM"){
+          LocationElement.innerHTML = "At Platform"
+        }
+        else if (data.service.locations[i].temporalData.status == undefined){
+          otherinfo = otherinfo +""
+        }
+        else{
+          otherinfo = otherinfo + data.service.locations[i].temporalData.status ?? "";
+        }
+        if (data.service.locations[i].temporalData.scheduledCallType != ADVERTISED_OPEN){
+          if (data.service.locations[i].temporalData.scheduledCallType == "ADVERTISED_SET_DOWN"){
+            otherinfo = otherinfo + "Drop-off Only"
+          }
+          else if (data.service.locations[i].temporalData.scheduledCallType == "ADVERTISED_PICK_UP"){
+            otherinfo = otherinfo + "Pick-up Only"
+          }
+          else if (data.service.locations[i].temporalData.scheduledCallType == "OPERATIONAL_ONLY"){
+            otherinfo = otherinfo + "Not for Passengers"
+          }
+          else{
+          otherinfo = otherinfo + data.service.locations[i].temporalData.scheduledCallType ?? "";
+          }
+        }
+        LocationElement.innerHTML =otherinfo
+
 
         row.appendChild(StationElement)
         // row.appendChild(AssociationsElement)
@@ -104,7 +133,7 @@ function addStations(data){
         row.appendChild(departureElement)
         row.appendChild(PlatformElement)
         row.appendChild(DelayElement)
-
+        row.appendChild(LocationElement)
         row.className = "row"
         stops.appendChild(row)
                   }
