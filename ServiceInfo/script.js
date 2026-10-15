@@ -102,7 +102,16 @@ function addStations(data){
         let LocationElement = document.createElement("span")
         let otherinfo = ""
         if (data.service.locations[i].temporalData.status == "AT_PLATFORM"){
-          LocationElement.innerHTML = "At Platform"
+          otherinfo = "At Platform"
+        }
+        else if (data.service.locations[i].temporalData.status == "APPROACHING"){
+          otherinfo = "Approaching"
+        }
+        else if (data.service.locations[i].temporalData.status == "DEPART_PREPARING"){
+          otherinfo = "Preparing to Depart"
+        }
+        else if (data.service.locations[i].temporalData.status == "DEPART_READY"){
+          otherinfo = "Ready to Depart"
         }
         else if (data.service.locations[i].temporalData.status == undefined){
           otherinfo = otherinfo +""
