@@ -536,6 +536,9 @@ function extractTrainDetails(data){
             extrainfo = " - " + service.temporalData.status
           }
         }
+        if (service.locationMetadata.isRequestStop == true){
+            extrainfo = " - " + "On Request"
+        }
         // let pltmode =""
         // if (service.scheduleMetadata.modeType!="TRAIN"){
         //   pltmode = service.modeType

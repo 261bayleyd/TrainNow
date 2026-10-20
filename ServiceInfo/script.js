@@ -6,8 +6,9 @@ let noticePrint = document.getElementById("notice")
 let stops = document.getElementById("stops")
 let serviceUid = document.getElementById("ServiceUid").value
 let currentHost = window.location.hostname;
+console.log(currentHost)
 let dev
-if (currentHost == "localhost" || currentHost == "127.0.0.1"){
+if (currentHost == "localhost" || currentHost == "127.0.0.1" || currentHost == "glowing-halibut-v6qrgvq96p7x26976-5500.app.github.dev"){
   dev = true
   console.log("Dev mode enabled")
 }
@@ -101,11 +102,15 @@ function addStations(data){
         }
         let LocationElement = document.createElement("span")
         let otherinfo = ""
+        // Status Check
         if (data.service.locations[i].temporalData.status == "AT_PLATFORM"){
           otherinfo = "At Platform"
         }
         else if (data.service.locations[i].temporalData.status == "APPROACHING"){
           otherinfo = "Approaching"
+        }
+        else if (data.service.locations[i].temporalData.status == "ARRIVING"){
+          otherinfo = "Arriving"
         }
         else if (data.service.locations[i].temporalData.status == "DEPART_PREPARING"){
           otherinfo = "Preparing to Depart"
@@ -119,21 +124,56 @@ function addStations(data){
         else{
           otherinfo = otherinfo + data.service.locations[i].temporalData.status ?? "";
         }
+        // Special Stop Check
         if (data.service.locations[i].temporalData.scheduledCallType != ADVERTISED_OPEN){
           if (data.service.locations[i].temporalData.scheduledCallType == "ADVERTISED_SET_DOWN"){
-            otherinfo = otherinfo + "Drop-off Only"
+            if (otherinfo != ""){
+              otherinfo = otherinfo + ", Drop-off Only"
+            }
+            else{
+              otherinfo = otherinfo + "Drop-off Only"
+            }
           }
           else if (data.service.locations[i].temporalData.scheduledCallType == "ADVERTISED_PICK_UP"){
-            otherinfo = otherinfo + "Pick-up Only"
+            if (otherinfo != ""){
+              otherinfo = otherinfo + ", Pick-up Only"
+            }
+            else{
+              otherinfo = otherinfo + "Pick-up Only"
+            }
           }
           else if (data.service.locations[i].temporalData.scheduledCallType == "OPERATIONAL_ONLY"){
-            otherinfo = otherinfo + "Not for Passengers"
+            if (otherinfo != ""){
+              otherinfo = otherinfo + ", Not for Passengers"
+            }
+            else{
+              otherinfo = otherinfo + "Not for Passengers"
+            }
           }
           else{
           otherinfo = otherinfo + data.service.locations[i].temporalData.scheduledCallType ?? "";
           }
         }
-        LocationElement.innerHTML =otherinfo
+        // Request Stop Check
+        if (data.service.locations[i].locationMetadata.isRequestStop == true){
+          if (otherinfo != ""){
+            otherinfo = otherinfo + ", Request Stop"
+          }
+          else{
+            otherinfo = otherinfo + "Request Stop"
+          }
+        }
+        if (data.service.locations[i].associatedServices != null){
+          for (let j=0; j<data.service.locations[i].associatedServices.length; j++){
+            if (otherinfo != ""){
+              otherinfo = otherinfo + ", " + data.service.locations[i].associatedServices[j].associationData.associationType + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity
+            }
+            else{
+              otherinfo = otherinfo + data.service.locations[i].associatedServices[j].associationData.associationType + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity
+            }
+          }
+        }
+        LocationElement.innerHTML = otherinfo
 
 
         row.appendChild(StationElement)
@@ -145,7 +185,7 @@ function addStations(data){
         row.appendChild(LocationElement)
         row.className = "row"
         stops.appendChild(row)
-                  }
+      }
     }
 // }
 // rtt/service?uniqueIdentity=gb-nr%3AL01525%3A2025-10-26
