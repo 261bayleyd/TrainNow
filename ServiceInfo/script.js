@@ -31,14 +31,14 @@ async function Submit(){
     let infotitle = document.getElementById("infotitle")
     let data = await getServiceInfo(uniqueIdentity)
     console.log(data)
-    let notice
+    let notice = ""
     if (data.service.scheduleMetadata.inPassengerService == false){
       notice = notice + "Notice: This Train is not in Revenue Passenger Service"
     }
     let classp = ""
     let Ope = data.service.scheduleMetadata.operator.name
     OperatorPrint.innerHTML = Ope
-    IdentityPrint.innerHTML = data.runningIdentity
+    IdentityPrint.innerHTML = data.service.scheduleMetadata.identity
     noticePrint.innerHTML = notice
     infotitle.innerHTML = data.service.origin[0].location.description + " To " + data.service.destination[0].location.description + " "
     addStations(data)
@@ -83,11 +83,11 @@ function addStations(data){
         // }
 
         let ArrivalElement = document.createElement("span")
-        ArrivalElement.innerHTML = data.service.locations[i].temporalData?.arrival?.realtimeActual?.slice(11, 16) ?? data.service.locations[i].temporalData?.arrival?.realtimeForecast?.slice(11, 16) ?? "";
+        // scheduleInternal
+        ArrivalElement.innerHTML = data.service.locations[i].temporalData?.arrival?.realtimeActual?.slice(11, 16) ?? data.service.locations[i].temporalData?.arrival?.realtimeForecast?.slice(11, 16) ?? data.service.locations[i].temporalData?.arrival?.scheduleAdvertised?.slice(11, 16) ?? data.service.locations[i].temporalData?.arrival?.scheduleInternal?.slice(11, 16) ?? "";
 
         let departureElement = document.createElement("span")
-        departureElement.innerHTML = data.service.locations[i].temporalData?.departure?.realtimeActual?.slice(11, 16) ?? data.service.locations[i].temporalData?.departure?.realtimeForecast?.slice(11, 16) ?? "";
-
+        departureElement.innerHTML = data.service.locations[i].temporalData?.departure?.realtimeActual?.slice(11, 16) ?? data.service.locations[i].temporalData?.departure?.realtimeForecast?.slice(11, 16) ?? data.service.locations[i].temporalData?.departure?.scheduleAdvertised?.slice(11, 16) ?? data.service.locations[i].temporalData?.departure?.scheduleInternal?.slice(11, 16) ?? "";
         let PlatformElement = document.createElement("span")
         PlatformElement.innerHTML = data.service.locations[i].locationMetadata?.platform?.actual ?? data.service.locations[i].locationMetadata?.platform?.forecast ?? data.service.locations[i].locationMetadata?.platform?.planned ?? "No info";
 
@@ -128,7 +128,7 @@ function addStations(data){
         if (data.service.locations[i].temporalData.scheduledCallType != ADVERTISED_OPEN){
           if (data.service.locations[i].temporalData.scheduledCallType == "ADVERTISED_SET_DOWN"){
             if (otherinfo != ""){
-              otherinfo = otherinfo + ", Drop-off Only"
+              otherinfo = otherinfo + "<br>" + "Drop-off Only"
             }
             else{
               otherinfo = otherinfo + "Drop-off Only"
@@ -136,7 +136,7 @@ function addStations(data){
           }
           else if (data.service.locations[i].temporalData.scheduledCallType == "ADVERTISED_PICK_UP"){
             if (otherinfo != ""){
-              otherinfo = otherinfo + ", Pick-up Only"
+              otherinfo = otherinfo + "<br>" + "Pick-up Only"
             }
             else{
               otherinfo = otherinfo + "Pick-up Only"
@@ -144,7 +144,7 @@ function addStations(data){
           }
           else if (data.service.locations[i].temporalData.scheduledCallType == "OPERATIONAL_ONLY"){
             if (otherinfo != ""){
-              otherinfo = otherinfo + ", Not for Passengers"
+              otherinfo = otherinfo + "<br>" + "Not for Passengers"
             }
             else{
               otherinfo = otherinfo + "Not for Passengers"
@@ -157,20 +157,43 @@ function addStations(data){
         // Request Stop Check
         if (data.service.locations[i].locationMetadata.isRequestStop == true){
           if (otherinfo != ""){
-            otherinfo = otherinfo + ", Request Stop"
+            otherinfo = otherinfo + "<br>" + "Request Stop"
           }
           else{
             otherinfo = otherinfo + "Request Stop"
           }
         }
+        ///ServiceInfo/index.html?service=
         if (data.service.locations[i].associatedServices != null){
           for (let j=0; j<data.service.locations[i].associatedServices.length; j++){
             if (otherinfo != ""){
-              otherinfo = otherinfo + ", " + data.service.locations[i].associatedServices[j].associationData.associationType + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity
+              if (data.service.locations[i].associatedServices[j].associationData.associationType == "DIVIDE_INTO"){
+                otherinfo = otherinfo + "<br>" + "<a href = './index.html?service=" + "gb-nr" + data.service.locations[i].associatedServices[j].scheduleMetadata.uniqueIdentity + "'>" + "Divides to form" + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity + "</a>"
+              }
+              else if (data.service.locations[i].associatedServices[j].associationData.associationType == "DIVIDE_FROM"){
+                otherinfo = otherinfo + "<br>" + "<a href = './index.html?service=" + "gb-nr" + data.service.locations[i].associatedServices[j].scheduleMetadata.uniqueIdentity + "'>" + "Divides from" + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity + "</a>"
+              }
+              else if (data.service.locations[i].associatedServices[j].associationData.associationType == "JOIN_FROM" || data.service.locations[i].associatedServices[j].associationData.associationType == "JOIN_INTO"){
+                otherinfo = otherinfo + "<br>" + "<a href = './index.html?service=" + "gb-nr" + data.service.locations[i].associatedServices[j].scheduleMetadata.uniqueIdentity + "'>" + "Joins" + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity + "</a>"
+              }
+              else{
+                otherinfo = otherinfo + "<br>" + "<a href = './index.html?service=" + "gb-nr" + data.service.locations[i].associatedServices[j].scheduleMetadata.uniqueIdentity + "'>" + data.service.locations[i].associatedServices[j].associationData.associationType + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity + "</a>"
+              }
             }
             else{
-              otherinfo = otherinfo + data.service.locations[i].associatedServices[j].associationData.associationType + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity
-            }
+              if (data.service.locations[i].associatedServices[j].associationData.associationType == "DIVIDE_INTO"){
+                otherinfo = otherinfo + "<a href = './index.html?service=" + "gb-nr" + data.service.locations[i].associatedServices[j].scheduleMetadata.uniqueIdentity + "'>" + "Divides to form" + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity + "</a>"
+              }
+              else if (data.service.locations[i].associatedServices[j].associationData.associationType == "DIVIDE_FROM"){
+                otherinfo = otherinfo + "<a href = './index.html?service=" + "gb-nr" + data.service.locations[i].associatedServices[j].scheduleMetadata.uniqueIdentity + "'>" + "Divides from" + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity + "</a>"
+              }
+              else if (data.service.locations[i].associatedServices[j].associationData.associationType == "JOIN_FROM" || data.service.locations[i].associatedServices[j].associationData.associationType == "JOIN_INTO"){
+                otherinfo = otherinfo + "<a href = './index.html?service=" + "gb-nr" + data.service.locations[i].associatedServices[j].scheduleMetadata.uniqueIdentity + "'>" + "Joins" + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity + "</a>"
+              }
+              else{
+                otherinfo = otherinfo + "<a href = './index.html?service=" + "gb-nr" + data.service.locations[i].associatedServices[j].scheduleMetadata.uniqueIdentity + "'>" + data.service.locations[i].associatedServices[j].associationData.associationType + " " + data.service.locations[i].associatedServices[j].scheduleMetadata.identity + "</a>"
+              } 
+           }
           }
         }
         LocationElement.innerHTML = otherinfo
